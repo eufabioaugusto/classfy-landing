@@ -273,8 +273,7 @@
       position: absolute;
       inset: 0;
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      grid-template-rows: repeat(3, 1fr);
+      grid-template-columns: repeat(3, 1fr);
       gap: 4px;
     }
 
@@ -283,9 +282,6 @@
       overflow: hidden;
       background: var(--surface);
     }
-
-    .mosaic-item:nth-child(1) { grid-row: 1 / 3; }
-    .mosaic-item:nth-child(4) { grid-row: 2 / 4; }
 
     .mosaic-item img {
       width: 100%;
@@ -857,38 +853,24 @@
       <div class="hero-right">
         <div class="mosaic">
           <div class="mosaic-item p1">
-            <img src="https://vhmurjknxaacjmvfkjbw.supabase.co/storage/v1/object/public/avatars/c5b1c443-7cfe-4355-8985-593839fb62cf/avatar.png" alt="Creator Mentor" onerror="this.style.display='none'" />
-            <div class="mosaic-overlay">
-              <span class="mosaic-name">Creator Mentor</span>
-              <span class="mosaic-tag">Marketing Digital</span>
-            </div>
-          </div>
-          <div class="mosaic-item p2">
-            <img src="https://vhmurjknxaacjmvfkjbw.supabase.co/storage/v1/object/public/contents/thumbnails/c5b1c443-7cfe-4355-8985-593839fb62cf/thumb1.jpg" alt="" onerror="this.style.display='none'" />
-            <div class="mosaic-overlay">
-              <span class="mosaic-name">Tráfego Pago</span>
-              <span class="mosaic-tag">Curso</span>
-            </div>
-          </div>
-          <div class="mosaic-item p3">
-            <img src="https://vhmurjknxaacjmvfkjbw.supabase.co/storage/v1/object/public/contents/thumbnails/c5b1c443-7cfe-4355-8985-593839fb62cf/thumb2.jpg" alt="" onerror="this.style.display='none'" />
-            <div class="mosaic-overlay">
-              <span class="mosaic-name">Copy que Converte</span>
-              <span class="mosaic-tag">Short</span>
-            </div>
-          </div>
-          <div class="mosaic-item p4">
             <img src="https://vhmurjknxaacjmvfkjbw.supabase.co/storage/v1/object/public/avatars/b3d8d49d-c9eb-4088-ad67-db7c665752d6/avatar.jpg" alt="Cindy Ribas" onerror="this.style.display='none'" />
             <div class="mosaic-overlay">
               <span class="mosaic-name">Cindy Ribas</span>
-              <span class="mosaic-tag">Finanças Pessoais</span>
+              <span class="mosaic-tag">Poder Pessoal e Espiritual</span>
             </div>
           </div>
-          <div class="mosaic-item p5">
-            <img src="https://vhmurjknxaacjmvfkjbw.supabase.co/storage/v1/object/public/contents/thumbnails/c5b1c443-7cfe-4355-8985-593839fb62cf/thumb3.jpg" alt="" onerror="this.style.display='none'" />
+          <div class="mosaic-item p2">
+            <img src="https://vhmurjknxaacjmvfkjbw.supabase.co/storage/v1/object/public/avatars/fc084ec7-18c4-4633-ab24-e84ae584f9ea/avatar.jpg" alt="Fabio Augusto" onerror="this.style.display='none'" />
             <div class="mosaic-overlay">
-              <span class="mosaic-name">Vendas no Instagram</span>
-              <span class="mosaic-tag">Aula</span>
+              <span class="mosaic-name">Fabio Augusto</span>
+              <span class="mosaic-tag">The Big Business</span>
+            </div>
+          </div>
+          <div class="mosaic-item p3">
+            <img src="https://vhmurjknxaacjmvfkjbw.supabase.co/storage/v1/object/public/avatars/e7d3af8e-5d8d-423f-b1d2-e7205d77630e/avatar.png" alt="Sol Mayumi" onerror="this.style.display='none'" />
+            <div class="mosaic-overlay">
+              <span class="mosaic-name">Sol Mayumi</span>
+              <span class="mosaic-tag">Terapia & Mastercoach</span>
             </div>
           </div>
         </div>
