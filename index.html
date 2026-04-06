@@ -60,7 +60,16 @@
       color: var(--text);
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
-      transition: background 0.4s ease, color 0.3s ease;
+    }
+
+    /* Theme transition overlay */
+    #theme-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.22s ease;
     }
 
     /* ========================
@@ -1029,6 +1038,9 @@
 </head>
 <body class="theme-dark">
 
+  <!-- THEME OVERLAY -->
+  <div id="theme-overlay"></div>
+
   <!-- NAV -->
   <nav>
     <a href="/" class="nav-logo">Classfy</a>
@@ -1360,27 +1372,27 @@
     let currentTab = 'creator';
 
     function switchTab(tab) {
+      if (tab === currentTab) return;
       currentTab = tab;
 
-      // Update buttons
-      document.querySelectorAll('.tab-btn').forEach(btn => {
-        btn.classList.toggle('active', btn.dataset.tab === tab);
-      });
+      const overlay = document.getElementById('theme-overlay');
+      const isLight = tab === 'consumer';
 
-      // Theme: creator = dark, consumer = light
-      if (tab === 'consumer') {
-        document.body.classList.remove('theme-dark');
-        document.body.classList.add('theme-light');
-      } else {
-        document.body.classList.remove('theme-light');
-        document.body.classList.add('theme-dark');
-      }
-
-      // Fade transition for hero content
-      const fadeEl = document.getElementById('hero-content');
-      fadeEl.classList.add('fading');
+      // Overlay color = target theme bg (hides the swap)
+      overlay.style.background = isLight ? '#f8f8f8' : '#000000';
+      overlay.style.opacity = '1';
 
       setTimeout(() => {
+        // Apply theme
+        document.body.classList.toggle('theme-light', isLight);
+        document.body.classList.toggle('theme-dark', !isLight);
+
+        // Update tab buttons
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+          btn.classList.toggle('active', btn.dataset.tab === tab);
+        });
+
+        // Swap content
         document.querySelectorAll('.creator-content').forEach(el => {
           el.classList.toggle('visible', tab === 'creator');
         });
@@ -1396,7 +1408,8 @@
           ? 'Quero ser Creator Fundador'
           : 'Quero aprender e ser recompensado';
 
-        fadeEl.classList.remove('fading');
+        // Fade overlay out
+        overlay.style.opacity = '0';
       }, 220);
     }
 
