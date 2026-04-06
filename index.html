@@ -46,7 +46,7 @@
       align-items: center;
       justify-content: space-between;
       padding: 20px 40px;
-      background: linear-gradient(to bottom, rgba(0,0,0,0.95), transparent);
+      background: linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, transparent 100%);
     }
 
     .nav-logo {
@@ -73,85 +73,88 @@
     }
     .btn-ghost:hover { border-color: var(--muted); color: var(--text); }
 
-    /* HERO */
+    /* ========================
+       HERO — FULL BLEED
+    ======================== */
+    .hero-wrapper {
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(ellipse 55% 70% at 75% 50%, rgba(224, 28, 75, 0.12) 0%, transparent 65%),
+        radial-gradient(ellipse 30% 40% at 15% 80%, rgba(224, 28, 75, 0.05) 0%, transparent 60%),
+        #000;
+    }
+
     .hero {
       min-height: 100vh;
       display: grid;
       grid-template-columns: 1fr 1fr;
-      align-items: center;
-      padding: 100px 64px 80px;
-      gap: 60px;
-      position: relative;
-      overflow: hidden;
-      max-width: 1400px;
-      margin: 0 auto;
+      align-items: stretch;
     }
 
+    /* LEFT COLUMN */
     .hero-left {
       display: flex;
       flex-direction: column;
-      align-items: flex-start;
+      justify-content: center;
+      padding: 120px 64px 80px 80px;
+      position: relative;
+      z-index: 2;
     }
 
     .hero-badge {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      background: var(--surface);
-      border: 1px solid var(--border);
+      border: 1px solid rgba(224, 28, 75, 0.4);
       border-radius: 100px;
       padding: 6px 16px;
-      font-size: 12px;
-      font-weight: 500;
-      color: var(--text-soft);
-      margin-bottom: 28px;
-      letter-spacing: 0.5px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--red);
+      margin-bottom: 32px;
+      letter-spacing: 0.8px;
       text-transform: uppercase;
-    }
-    .hero-badge span { color: var(--red); }
-
-    .hero-headline {
-      font-size: clamp(38px, 4.5vw, 72px);
-      font-weight: 800;
-      line-height: 1.05;
-      letter-spacing: -2px;
-      margin-bottom: 20px;
-      transition: opacity 0.3s;
+      width: fit-content;
+      animation: fade-up 0.6s ease-out 0.1s both;
     }
 
-    .hero-sub {
-      font-size: clamp(15px, 1.5vw, 18px);
-      color: var(--text-soft);
-      max-width: 460px;
-      margin-bottom: 36px;
-      font-weight: 400;
-      line-height: 1.7;
-      transition: opacity 0.3s;
+    .hero-badge .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--red);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
     }
 
     /* TAB TOGGLE */
     .tab-toggle {
       display: inline-flex;
-      background: var(--surface);
+      background: rgba(255,255,255,0.06);
       border: 1px solid var(--border);
       border-radius: 100px;
       padding: 4px;
-      margin-bottom: 36px;
-      position: relative;
-      z-index: 1;
+      margin-bottom: 28px;
+      width: fit-content;
+      animation: fade-up 0.6s ease-out 0.2s both;
     }
 
     .tab-btn {
       background: transparent;
       border: none;
       color: var(--muted);
-      padding: 10px 28px;
+      padding: 9px 24px;
       border-radius: 100px;
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 600;
       cursor: pointer;
       transition: all 0.25s;
-      letter-spacing: 0.3px;
+      letter-spacing: 0.2px;
     }
 
     .tab-btn.active {
@@ -159,15 +162,61 @@
       color: var(--black);
     }
 
-    /* CTA BUTTONS */
+    .hero-headline {
+      font-size: clamp(36px, 4vw, 64px);
+      font-weight: 900;
+      line-height: 1.0;
+      letter-spacing: -2.5px;
+      margin-bottom: 20px;
+      animation: fade-up 0.6s ease-out 0.3s both;
+    }
+
+    .hero-headline .accent {
+      color: var(--red);
+      position: relative;
+      display: inline-block;
+    }
+
+    .hero-headline .accent::after {
+      content: '';
+      position: absolute;
+      bottom: 2px;
+      left: 0;
+      width: 0%;
+      height: 3px;
+      background: var(--red);
+      border-radius: 2px;
+      animation: underline-in 0.7s ease-out 0.9s forwards;
+    }
+
+    @keyframes underline-in { to { width: 100%; } }
+
+    .hero-sub {
+      font-size: clamp(15px, 1.4vw, 17px);
+      color: var(--text-soft);
+      max-width: 440px;
+      margin-bottom: 40px;
+      font-weight: 400;
+      line-height: 1.75;
+      animation: fade-up 0.6s ease-out 0.4s both;
+    }
+
+    .hero-cta-group {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      flex-wrap: wrap;
+      animation: fade-up 0.6s ease-out 0.5s both;
+    }
+
     .btn-primary {
       background: var(--red);
       color: white;
       border: none;
-      padding: 16px 36px;
+      padding: 16px 32px;
       border-radius: var(--radius);
-      font-size: 16px;
-      font-weight: 600;
+      font-size: 15px;
+      font-weight: 700;
       cursor: pointer;
       text-decoration: none;
       display: inline-block;
@@ -188,30 +237,49 @@
     }
     .btn-secondary:hover { color: var(--text); }
 
-    .hero-cta-group {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      flex-wrap: wrap;
+    /* RIGHT COLUMN — MOSAIC */
+    .hero-right {
+      position: relative;
+      min-height: 100vh;
     }
 
-    /* PHOTO MOSAIC */
-    .hero-right {
-      height: 560px;
-      position: relative;
+    /* Gradient dissolves mosaic into copy */
+    .hero-right::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to right,
+        rgba(0,0,0,0.75) 0%,
+        rgba(0,0,0,0.2) 25%,
+        transparent 55%
+      );
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    /* Bottom fade */
+    .hero-right::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 120px;
+      background: linear-gradient(to top, #000 0%, transparent 100%);
+      z-index: 2;
+      pointer-events: none;
     }
 
     .mosaic {
+      position: absolute;
+      inset: 0;
       display: grid;
       grid-template-columns: 1fr 1fr;
-      grid-template-rows: 1fr 1fr 1fr;
-      gap: 8px;
-      height: 100%;
+      grid-template-rows: repeat(3, 1fr);
+      gap: 4px;
     }
 
     .mosaic-item {
       position: relative;
-      border-radius: 12px;
       overflow: hidden;
       background: var(--surface);
     }
@@ -224,47 +292,147 @@
       height: 100%;
       object-fit: cover;
       display: block;
-      transition: transform 0.4s ease;
+      transition: transform 0.6s ease;
     }
-
-    .mosaic-item:hover img { transform: scale(1.04); }
+    .mosaic-item:hover img { transform: scale(1.05); }
 
     .mosaic-overlay {
       position: absolute;
       bottom: 0; left: 0; right: 0;
-      padding: 20px 16px 16px;
-      background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%);
+      padding: 24px 16px 16px;
+      background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 100%);
+      z-index: 3;
     }
 
     .mosaic-name {
       font-size: 13px;
-      font-weight: 600;
+      font-weight: 700;
       color: #fff;
       display: block;
+      letter-spacing: -0.2px;
     }
 
     .mosaic-tag {
       font-size: 11px;
-      color: rgba(255,255,255,0.6);
+      color: rgba(255,255,255,0.55);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
 
-    /* Gradient placeholder when no image */
-    .mosaic-item.placeholder-1 { background: linear-gradient(135deg, #1a0a10 0%, #3d0f20 100%); }
-    .mosaic-item.placeholder-2 { background: linear-gradient(135deg, #0a0a1a 0%, #1a1a40 100%); }
-    .mosaic-item.placeholder-3 { background: linear-gradient(135deg, #0d1a0a 0%, #1a3d10 100%); }
-    .mosaic-item.placeholder-4 { background: linear-gradient(135deg, #1a1000 0%, #3d2800 100%); }
-    .mosaic-item.placeholder-5 { background: linear-gradient(135deg, #10001a 0%, #28003d 100%); }
+    /* Rich gradient placeholders */
+    .mosaic-item.p1 { background: linear-gradient(160deg, #1c0a12 0%, #3d1020 50%, #5a1530 100%); }
+    .mosaic-item.p2 { background: linear-gradient(160deg, #0a0c1c 0%, #151830 50%, #1e2245 100%); }
+    .mosaic-item.p3 { background: linear-gradient(160deg, #0c150a 0%, #152010 50%, #1a2e14 100%); }
+    .mosaic-item.p4 { background: linear-gradient(160deg, #1a0e00 0%, #2d1800 50%, #3d2200 100%); }
+    .mosaic-item.p5 { background: linear-gradient(160deg, #100018 0%, #200030 50%, #2c0042 100%); }
 
-    /* DIVIDER */
+    /* FADE-UP ANIMATION */
+    @keyframes fade-up {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* CONTENT VISIBILITY */
+    .creator-content, .consumer-content { display: none; }
+    .creator-content.visible, .consumer-content.visible { display: block; }
+    .fade-content { transition: opacity 0.2s ease; }
+    .fade-content.fading { opacity: 0; }
+
+    /* ========================
+       DIVIDER
+    ======================== */
     .divider {
       width: 100%;
-      max-width: 1200px;
+      max-width: 1100px;
       margin: 0 auto;
       height: 1px;
       background: var(--border);
     }
 
-    /* SECTIONS */
+    /* ========================
+       PROBLEM SECTION
+    ======================== */
+    .problem-section {
+      padding: 80px 24px;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .problem-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .problem-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+
+    .problem-title {
+      font-size: clamp(26px, 3vw, 40px);
+      font-weight: 800;
+      letter-spacing: -1.5px;
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+
+    .problem-title span { color: var(--red); }
+
+    .problem-desc {
+      font-size: 16px;
+      color: var(--text-soft);
+      line-height: 1.75;
+    }
+
+    .problem-stats {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .problem-stat-item {
+      padding: 28px 32px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .problem-stat-item::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: var(--red);
+    }
+
+    .problem-stat-num {
+      font-size: 40px;
+      font-weight: 900;
+      letter-spacing: -2px;
+      line-height: 1;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+
+    .problem-stat-label {
+      font-size: 14px;
+      color: var(--text-soft);
+      line-height: 1.4;
+    }
+
+    /* ========================
+       SECTIONS
+    ======================== */
     section { padding: 100px 24px; }
 
     .container {
@@ -274,7 +442,7 @@
 
     .section-label {
       font-size: 11px;
-      font-weight: 600;
+      font-weight: 700;
       letter-spacing: 2px;
       text-transform: uppercase;
       color: var(--red);
@@ -283,34 +451,38 @@
 
     .section-title {
       font-size: clamp(28px, 4vw, 48px);
-      font-weight: 700;
-      letter-spacing: -1px;
-      line-height: 1.15;
+      font-weight: 800;
+      letter-spacing: -1.5px;
+      line-height: 1.1;
       margin-bottom: 16px;
     }
 
     .section-sub {
-      font-size: 18px;
+      font-size: 17px;
       color: var(--text-soft);
-      max-width: 560px;
+      max-width: 540px;
       line-height: 1.7;
     }
 
-    /* HOW IT WORKS - CREATOR */
+    /* ========================
+       HOW IT WORKS — CREATOR
+    ======================== */
     .steps-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 24px;
-      margin-top: 60px;
+      gap: 20px;
+      margin-top: 56px;
     }
 
     .step-card {
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 16px;
+      border-radius: 20px;
       padding: 36px 32px;
       position: relative;
+      transition: border-color 0.2s;
     }
+    .step-card:hover { border-color: var(--muted); }
 
     .step-number {
       font-size: 11px;
@@ -335,56 +507,68 @@
     }
 
     .step-title {
-      font-size: 20px;
+      font-size: 19px;
       font-weight: 700;
       margin-bottom: 10px;
-      letter-spacing: -0.3px;
+      letter-spacing: -0.4px;
     }
 
     .step-desc {
       font-size: 15px;
       color: var(--text-soft);
-      line-height: 1.6;
+      line-height: 1.65;
     }
 
-    /* POOL SECTION */
+    /* ========================
+       POOL SECTION
+    ======================== */
     .pool-section {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 24px;
-      padding: 60px;
-      margin-top: 60px;
+      padding: 56px 60px;
+      margin-top: 56px;
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 60px;
       align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .pool-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 80% at 100% 50%, rgba(224, 28, 75, 0.07) 0%, transparent 70%);
+      pointer-events: none;
     }
 
     .pool-title {
-      font-size: 36px;
-      font-weight: 800;
-      letter-spacing: -1px;
-      line-height: 1.2;
+      font-size: clamp(28px, 3vw, 40px);
+      font-weight: 900;
+      letter-spacing: -1.5px;
+      line-height: 1.1;
       margin-bottom: 16px;
     }
 
     .pool-title span { color: var(--red); }
 
     .pool-desc {
-      font-size: 16px;
+      font-size: 15px;
       color: var(--text-soft);
-      line-height: 1.7;
+      line-height: 1.75;
       margin-bottom: 32px;
     }
 
     .pool-formula {
       background: var(--surface-2);
       border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 20px 24px;
-      font-size: 14px;
+      border-radius: 10px;
+      padding: 16px 20px;
+      font-size: 13px;
       color: var(--text-soft);
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
 
     .pool-formula code {
@@ -395,19 +579,19 @@
 
     .pool-stat {
       text-align: center;
-      padding: 32px;
+      padding: 48px 32px;
       background: var(--surface-2);
       border: 1px solid var(--border);
-      border-radius: 16px;
+      border-radius: 20px;
     }
 
     .pool-stat-num {
-      font-size: 64px;
-      font-weight: 800;
-      letter-spacing: -3px;
+      font-size: 80px;
+      font-weight: 900;
+      letter-spacing: -4px;
       line-height: 1;
       color: var(--red);
-      margin-bottom: 8px;
+      margin-bottom: 12px;
     }
 
     .pool-stat-label {
@@ -416,26 +600,30 @@
       line-height: 1.5;
     }
 
-    /* FORMATS - CONSUMER */
+    /* ========================
+       FORMATS — CONSUMER
+    ======================== */
     .formats-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 16px;
-      margin-top: 60px;
+      margin-top: 56px;
     }
 
     .format-card {
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 16px;
+      border-radius: 20px;
       padding: 32px;
       display: flex;
       gap: 20px;
       align-items: flex-start;
+      transition: border-color 0.2s;
     }
+    .format-card:hover { border-color: var(--muted); }
 
     .format-icon {
-      font-size: 28px;
+      font-size: 24px;
       flex-shrink: 0;
       width: 52px;
       height: 52px;
@@ -446,52 +634,49 @@
       justify-content: center;
     }
 
-    .format-title { font-size: 18px; font-weight: 700; margin-bottom: 6px; }
-    .format-desc { font-size: 14px; color: var(--text-soft); line-height: 1.5; }
+    .format-title { font-size: 17px; font-weight: 700; margin-bottom: 6px; letter-spacing: -0.3px; }
+    .format-desc { font-size: 14px; color: var(--text-soft); line-height: 1.55; }
 
-    /* STATS / SOCIAL PROOF */
-    .stats-section {
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      padding: 60px 24px;
-    }
-
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 40px;
-      max-width: 900px;
-      margin: 0 auto;
-      text-align: center;
-    }
-
-    .stat-num {
-      font-size: 48px;
-      font-weight: 800;
-      letter-spacing: -2px;
-      line-height: 1;
-      margin-bottom: 8px;
-    }
-
-    .stat-label { font-size: 14px; color: var(--text-soft); }
-
-    /* FORM SECTION */
+    /* ========================
+       WAITLIST / FORM
+    ======================== */
     .form-section {
-      background: var(--surface);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 80px 24px;
+      position: relative;
+      background:
+        radial-gradient(ellipse 70% 60% at 50% 100%, rgba(224, 28, 75, 0.18) 0%, transparent 65%),
+        #000;
       border-top: 1px solid var(--border);
-      padding: 100px 24px;
     }
 
     .form-wrapper {
-      max-width: 560px;
-      margin: 0 auto;
+      max-width: 600px;
+      width: 100%;
       text-align: center;
     }
 
+    .form-tag {
+      display: inline-block;
+      border: 1px solid rgba(224, 28, 75, 0.5);
+      color: var(--red);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 6px 18px;
+      border-radius: 999px;
+      margin-bottom: 24px;
+    }
+
     .form-title {
-      font-size: clamp(28px, 4vw, 44px);
-      font-weight: 800;
-      letter-spacing: -1.5px;
+      font-size: clamp(30px, 4vw, 50px);
+      font-weight: 900;
+      letter-spacing: -2px;
+      line-height: 1.05;
       margin-bottom: 16px;
     }
 
@@ -499,26 +684,28 @@
       font-size: 17px;
       color: var(--text-soft);
       margin-bottom: 48px;
-      line-height: 1.6;
+      line-height: 1.65;
     }
 
     .form-group {
-      margin-bottom: 16px;
+      margin-bottom: 14px;
       text-align: left;
     }
 
     .form-group label {
       display: block;
-      font-size: 13px;
-      font-weight: 500;
+      font-size: 12px;
+      font-weight: 600;
       color: var(--text-soft);
       margin-bottom: 8px;
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
     }
 
     .form-group input,
     .form-group select {
       width: 100%;
-      background: var(--surface-2);
+      background: rgba(255,255,255,0.06);
       border: 1px solid var(--border);
       border-radius: var(--radius);
       padding: 14px 16px;
@@ -532,9 +719,8 @@
 
     .form-group input::placeholder { color: var(--muted); }
     .form-group input:focus,
-    .form-group select:focus { border-color: var(--muted); }
-
-    .form-group select option { background: var(--surface-2); }
+    .form-group select:focus { border-color: rgba(224,28,75,0.6); }
+    .form-group select option { background: #111; }
 
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 
@@ -546,23 +732,32 @@
       background: var(--red);
       color: white;
       border: none;
-      padding: 16px;
+      padding: 18px;
       border-radius: var(--radius);
       font-size: 16px;
-      font-weight: 600;
+      font-weight: 700;
       cursor: pointer;
       margin-top: 8px;
       transition: all 0.2s;
       font-family: inherit;
+      letter-spacing: -0.3px;
     }
-    .submit-btn:hover { background: var(--red-hover); }
-    .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+    .submit-btn:hover { background: var(--red-hover); transform: translateY(-1px); }
+    .submit-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
 
     .form-note {
       font-size: 13px;
       color: var(--muted);
       margin-top: 16px;
+      line-height: 1.5;
     }
+
+    .form-count {
+      font-size: 14px;
+      color: var(--text-soft);
+      margin-bottom: 32px;
+    }
+    .form-count strong { color: var(--text); font-weight: 700; }
 
     /* SUCCESS STATE */
     .success-message {
@@ -572,8 +767,8 @@
     }
     .success-message.visible { display: block; }
     .success-icon { font-size: 48px; margin-bottom: 16px; }
-    .success-title { font-size: 24px; font-weight: 700; margin-bottom: 8px; }
-    .success-sub { color: var(--text-soft); }
+    .success-title { font-size: 28px; font-weight: 800; letter-spacing: -1px; margin-bottom: 8px; }
+    .success-sub { color: var(--text-soft); font-size: 16px; line-height: 1.6; }
 
     /* FOOTER */
     footer {
@@ -589,35 +784,29 @@
     .footer-logo { font-size: 16px; font-weight: 700; color: var(--text-soft); }
     .footer-copy { font-size: 13px; color: var(--muted); }
 
-    /* CONTENT VISIBILITY */
-    .creator-content, .consumer-content { display: none; }
-    .creator-content.visible, .consumer-content.visible { display: block; }
-
-    /* RESPONSIVE */
-    @media (max-width: 900px) {
-      .hero {
-        grid-template-columns: 1fr;
-        padding: 100px 28px 60px;
-        gap: 48px;
-        min-height: auto;
+    /* ========================
+       RESPONSIVE
+    ======================== */
+    @media (max-width: 960px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero-left { padding: 110px 32px 60px; }
+      .hero-right { min-height: 60vw; }
+      .hero-right::before {
+        background: linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, transparent 30%, transparent 70%, rgba(0,0,0,0.7) 100%);
       }
-      .hero-right { height: 360px; }
+      .problem-inner { grid-template-columns: 1fr; gap: 48px; }
     }
 
     @media (max-width: 768px) {
       nav { padding: 16px 20px; }
-      .pool-section { grid-template-columns: 1fr; padding: 40px 28px; gap: 40px; }
+      .hero-left { padding: 100px 24px 48px; }
+      .hero-right { min-height: 50vw; }
+      .pool-section { grid-template-columns: 1fr; padding: 36px 28px; gap: 36px; }
       .formats-grid { grid-template-columns: 1fr; }
-      .stats-grid { grid-template-columns: 1fr; gap: 32px; }
       .form-row { grid-template-columns: 1fr; }
-      section { padding: 70px 20px; }
+      section { padding: 72px 20px; }
       footer { flex-direction: column; gap: 12px; text-align: center; }
-      .hero-right { height: 300px; }
     }
-
-    /* FADE TRANSITION */
-    .fade-content { transition: opacity 0.25s ease; }
-    .fade-content.fading { opacity: 0; }
   </style>
 </head>
 <body>
@@ -631,123 +820,103 @@
   </nav>
 
   <!-- HERO -->
-  <section class="hero">
-    <!-- LEFT COLUMN -->
-    <div class="hero-left">
-      <div class="hero-badge">
-        <span>●</span> Lançamento em breve — vagas limitadas
-      </div>
-
-      <div class="tab-toggle">
-        <button class="tab-btn active" data-tab="creator" onclick="switchTab('creator')">Sou Creator</button>
-        <button class="tab-btn" data-tab="consumer" onclick="switchTab('consumer')">Quero Aprender</button>
-      </div>
-
-      <div class="fade-content" id="hero-content">
-        <!-- CREATOR -->
-        <div class="creator-content visible" id="creator-hero">
-          <h1 class="hero-headline">Seu conhecimento<br/>vale mais do que<br/>você imagina.</h1>
-          <p class="hero-sub">Publique o que você sabe. Todo mês, uma fatia real da receita da plataforma vai para quem gera valor — você.</p>
+  <div class="hero-wrapper">
+    <div class="hero">
+      <!-- LEFT COLUMN -->
+      <div class="hero-left">
+        <div class="hero-badge">
+          <span class="dot"></span> Lançamento em breve — vagas limitadas
         </div>
 
-        <!-- CONSUMER -->
-        <div class="consumer-content" id="consumer-hero">
-          <h1 class="hero-headline">Aprenda com quem<br/>realmente sabe<br/>do que faz.</h1>
-          <p class="hero-sub">Cursos, aulas, shorts e lives dos melhores criadores de conteúdo educacional. Uma assinatura. Conhecimento sem limite.</p>
+        <div class="tab-toggle">
+          <button class="tab-btn active" data-tab="creator" onclick="switchTab('creator')">Sou Creator</button>
+          <button class="tab-btn" data-tab="consumer" onclick="switchTab('consumer')">Quero Aprender</button>
         </div>
-      </div>
 
-      <div class="hero-cta-group">
-        <a href="#form" class="btn-primary" id="hero-cta">Quero ser Creator Fundador</a>
-        <a href="#como-funciona" class="btn-secondary">Como funciona →</a>
-      </div>
-    </div>
+        <div class="fade-content" id="hero-content">
+          <!-- CREATOR -->
+          <div class="creator-content visible" id="creator-hero">
+            <h1 class="hero-headline">A plataforma que paga<br/>pelo que você <span class="accent">entrega</span>,<br/>não pelo que ela decide.</h1>
+            <p class="hero-sub">Todo mês, 40% da receita total da Classfy é distribuído entre os creators por performance real. Fórmula pública. Sem algoritmo que te penaliza.</p>
+          </div>
 
-    <!-- RIGHT COLUMN — PHOTO MOSAIC -->
-    <div class="hero-right">
-      <div class="mosaic">
-        <!-- Card 1 — tall, spans rows 1-2 -->
-        <div class="mosaic-item placeholder-1">
-          <img
-            src="https://vhmurjknxaacjmvfkjbw.supabase.co/storage/v1/object/public/avatars/c5b1c443-7cfe-4355-8985-593839fb62cf/avatar.png"
-            alt="Creator Mentor"
-            onerror="this.style.display='none'"
-          />
-          <div class="mosaic-overlay">
-            <span class="mosaic-name">Creator Mentor</span>
-            <span class="mosaic-tag">Marketing Digital</span>
+          <!-- CONSUMER -->
+          <div class="consumer-content" id="consumer-hero">
+            <h1 class="hero-headline">Você aprende.<br/>Você avança.<br/>Você é <span class="accent">recompensado</span>.</h1>
+            <p class="hero-sub">Na Classfy, consumir conhecimento gera Performance Points que valem dinheiro real todo mês. Não é cashback. É reconhecimento por dedicação.</p>
           </div>
         </div>
 
-        <!-- Card 2 — row 1, col 2 -->
-        <div class="mosaic-item placeholder-2">
-          <img
-            src="https://vhmurjknxaacjmvfkjbw.supabase.co/storage/v1/object/public/contents/thumbnails/c5b1c443-7cfe-4355-8985-593839fb62cf/thumb1.jpg"
-            alt="Aula de Marketing"
-            onerror="this.style.display='none'"
-          />
-          <div class="mosaic-overlay">
-            <span class="mosaic-name">Tráfego Pago</span>
-            <span class="mosaic-tag">Curso</span>
-          </div>
+        <div class="hero-cta-group">
+          <a href="#form" class="btn-primary" id="hero-cta">Quero ser Creator Fundador</a>
+          <a href="#como-funciona" class="btn-secondary">Como funciona →</a>
         </div>
+      </div>
 
-        <!-- Card 3 — row 2, col 2 -->
-        <div class="mosaic-item placeholder-3">
-          <img
-            src="https://vhmurjknxaacjmvfkjbw.supabase.co/storage/v1/object/public/contents/thumbnails/c5b1c443-7cfe-4355-8985-593839fb62cf/thumb2.jpg"
-            alt="Conteúdo"
-            onerror="this.style.display='none'"
-          />
-          <div class="mosaic-overlay">
-            <span class="mosaic-name">Copy que Converte</span>
-            <span class="mosaic-tag">Short</span>
+      <!-- RIGHT COLUMN — PHOTO MOSAIC -->
+      <div class="hero-right">
+        <div class="mosaic">
+          <div class="mosaic-item p1">
+            <img src="https://vhmurjknxaacjmvfkjbw.supabase.co/storage/v1/object/public/avatars/c5b1c443-7cfe-4355-8985-593839fb62cf/avatar.png" alt="Creator Mentor" onerror="this.style.display='none'" />
+            <div class="mosaic-overlay">
+              <span class="mosaic-name">Creator Mentor</span>
+              <span class="mosaic-tag">Marketing Digital</span>
+            </div>
           </div>
-        </div>
-
-        <!-- Card 4 — tall, spans rows 2-3 (col 2) -->
-        <div class="mosaic-item placeholder-4">
-          <img
-            src="https://vhmurjknxaacjmvfkjbw.supabase.co/storage/v1/object/public/avatars/b3d8d49d-c9eb-4088-ad67-db7c665752d6/avatar.jpg"
-            alt="Cindy Ribas"
-            onerror="this.style.display='none'"
-          />
-          <div class="mosaic-overlay">
-            <span class="mosaic-name">Cindy Ribas</span>
-            <span class="mosaic-tag">Finanças Pessoais</span>
+          <div class="mosaic-item p2">
+            <img src="https://vhmurjknxaacjmvfkjbw.supabase.co/storage/v1/object/public/contents/thumbnails/c5b1c443-7cfe-4355-8985-593839fb62cf/thumb1.jpg" alt="" onerror="this.style.display='none'" />
+            <div class="mosaic-overlay">
+              <span class="mosaic-name">Tráfego Pago</span>
+              <span class="mosaic-tag">Curso</span>
+            </div>
           </div>
-        </div>
-
-        <!-- Card 5 — row 3, col 1 -->
-        <div class="mosaic-item placeholder-5">
-          <img
-            src="https://vhmurjknxaacjmvfkjbw.supabase.co/storage/v1/object/public/contents/thumbnails/c5b1c443-7cfe-4355-8985-593839fb62cf/thumb3.jpg"
-            alt="Conteúdo"
-            onerror="this.style.display='none'"
-          />
-          <div class="mosaic-overlay">
-            <span class="mosaic-name">Vendas no Instagram</span>
-            <span class="mosaic-tag">Aula</span>
+          <div class="mosaic-item p3">
+            <img src="https://vhmurjknxaacjmvfkjbw.supabase.co/storage/v1/object/public/contents/thumbnails/c5b1c443-7cfe-4355-8985-593839fb62cf/thumb2.jpg" alt="" onerror="this.style.display='none'" />
+            <div class="mosaic-overlay">
+              <span class="mosaic-name">Copy que Converte</span>
+              <span class="mosaic-tag">Short</span>
+            </div>
+          </div>
+          <div class="mosaic-item p4">
+            <img src="https://vhmurjknxaacjmvfkjbw.supabase.co/storage/v1/object/public/avatars/b3d8d49d-c9eb-4088-ad67-db7c665752d6/avatar.jpg" alt="Cindy Ribas" onerror="this.style.display='none'" />
+            <div class="mosaic-overlay">
+              <span class="mosaic-name">Cindy Ribas</span>
+              <span class="mosaic-tag">Finanças Pessoais</span>
+            </div>
+          </div>
+          <div class="mosaic-item p5">
+            <img src="https://vhmurjknxaacjmvfkjbw.supabase.co/storage/v1/object/public/contents/thumbnails/c5b1c443-7cfe-4355-8985-593839fb62cf/thumb3.jpg" alt="" onerror="this.style.display='none'" />
+            <div class="mosaic-overlay">
+              <span class="mosaic-name">Vendas no Instagram</span>
+              <span class="mosaic-tag">Aula</span>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- STATS -->
-  <div class="stats-section">
-    <div class="stats-grid">
+  <!-- PROBLEM -->
+  <div class="problem-section">
+    <div class="problem-inner">
       <div>
-        <div class="stat-num">40%</div>
-        <div class="stat-label">da receita distribuída mensalmente entre creators</div>
+        <p class="problem-label">O problema que ninguém resolve</p>
+        <h2 class="problem-title">Criadores trabalhando duro.<br/>Plataformas decidindo <span>quanto valem</span>.</h2>
+        <p class="problem-desc">CPM arbitrário, algoritmo que penaliza quem não paga por tráfego, curadoria subjetiva — o modelo atual favorece a plataforma, não quem cria. E o aluno? Paga, assiste, e não recebe nada em troca do seu tempo e dedicação.</p>
       </div>
-      <div>
-        <div class="stat-num">0</div>
-        <div class="stat-label">taxa de entrada ou mensalidade para creators</div>
-      </div>
-      <div>
-        <div class="stat-num">5+</div>
-        <div class="stat-label">formatos suportados: cursos, aulas, shorts, lives, podcasts</div>
+      <div class="problem-stats">
+        <div class="problem-stat-item">
+          <div class="problem-stat-num">40%</div>
+          <div class="problem-stat-label">da receita total distribuída mensalmente — fórmula pública e imutável</div>
+        </div>
+        <div class="problem-stat-item">
+          <div class="problem-stat-num">R$ 0</div>
+          <div class="problem-stat-label">de taxa para entrar como creator — sem mensalidade, sem custo de publicação</div>
+        </div>
+        <div class="problem-stat-item">
+          <div class="problem-stat-num">2×</div>
+          <div class="problem-stat-label">a Classfy é a única plataforma onde criadores e alunos ganham ao mesmo tempo</div>
+        </div>
       </div>
     </div>
   </div>
@@ -756,8 +925,8 @@
   <section id="como-funciona" class="creator-content visible">
     <div class="container">
       <p class="section-label">Para Creators</p>
-      <h2 class="section-title">Como você ganha<br/>na Classfy</h2>
-      <p class="section-sub">Sem CPM arbitrário. Sem algoritmo que te penaliza. Só performance real.</p>
+      <h2 class="section-title">Como o pool funciona<br/>para você</h2>
+      <p class="section-sub">Sem CPM arbitrário. Sem algoritmo que te penaliza. Sua participação é proporcional ao seu impacto real.</p>
 
       <div class="steps-grid">
         <div class="step-card">
@@ -770,20 +939,20 @@
           <div class="step-number">Passo 02</div>
           <div class="step-icon">⚡</div>
           <h3 class="step-title">Acumule Performance Points</h3>
-          <p class="step-desc">Cada visualização, like, conclusão de aula e engajamento gera Performance Points. Quanto melhor seu conteúdo, mais PP você acumula.</p>
+          <p class="step-desc">Visualizações, tempo de conclusão, engajamento real. Quanto melhor seu conteúdo, mais PP você acumula. Os critérios são fixos e públicos.</p>
         </div>
         <div class="step-card">
           <div class="step-number">Passo 03</div>
           <div class="step-icon">💰</div>
           <h3 class="step-title">Receba sua fatia do pool</h3>
-          <p class="step-desc">Todo mês, 40% da receita total da plataforma é distribuído proporcionalmente entre todos os creators ativos. Transparência total.</p>
+          <p class="step-desc">Todo mês, 40% da receita total é distribuído proporcionalmente entre todos os creators ativos. Você pode calcular sua participação antes de receber.</p>
         </div>
       </div>
 
       <div class="pool-section">
         <div>
-          <h3 class="pool-title">O pool que<br/>não mente.</h3>
-          <p class="pool-desc">A fórmula é pública e imutável. Não tem algoritmo que te prejudica, não tem curadoria subjetiva. Seu ganho é proporcional ao seu impacto real.</p>
+          <h3 class="pool-title">O pool que<br/><span>não mente</span>.</h3>
+          <p class="pool-desc">A maioria das plataformas decide quanto você recebe nos bastidores. Aqui a conta é aberta. Sem ajuste discricionário. Sem corte surpresa. Se a Classfy cresce, você cresce junto — matematicamente.</p>
           <div class="pool-formula">
             Seu ganho = <code>(seus PP / total PP) × pool do mês</code>
           </div>
@@ -794,7 +963,7 @@
         <div>
           <div class="pool-stat">
             <div class="pool-stat-num">40%</div>
-            <div class="pool-stat-label">da receita total vai para<br/>o pool de creators todo mês</div>
+            <div class="pool-stat-label">da receita total vai para<br/>creators e alunos todo mês</div>
           </div>
         </div>
       </div>
@@ -802,11 +971,11 @@
   </section>
 
   <!-- WHAT'S INSIDE — CONSUMER -->
-  <section id="para-consumidores" class="consumer-content">
+  <section id="para-alunos" class="consumer-content">
     <div class="container">
       <p class="section-label">Para Quem Quer Aprender</p>
-      <h2 class="section-title">Tudo o que você<br/>precisa aprender,<br/>num só lugar.</h2>
-      <p class="section-sub">De shorts de 60 segundos a cursos completos. Cada formato para um momento de aprendizado diferente.</p>
+      <h2 class="section-title">Aprenda com quem<br/>realmente sabe.<br/>E seja pago por isso.</h2>
+      <p class="section-sub">Cada conteúdo consumido com atenção gera Performance Points. Esses pontos valem participação no pool mensal — reconhecimento real por dedicação real.</p>
 
       <div class="formats-grid">
         <div class="format-card">
@@ -820,14 +989,14 @@
           <div class="format-icon">🎓</div>
           <div>
             <h3 class="format-title">Cursos</h3>
-            <p class="format-desc">Trilhas completas com módulos, aulas, quizzes e certificado. Do iniciante ao avançado.</p>
+            <p class="format-desc">Trilhas completas com módulos, aulas e certificado. Do iniciante ao avançado, em qualquer nicho.</p>
           </div>
         </div>
         <div class="format-card">
           <div class="format-icon">🎙️</div>
           <div>
             <h3 class="format-title">Podcasts</h3>
-            <p class="format-desc">Conteúdo para ouvir enquanto você faz outra coisa. Insights de especialistas em áudio.</p>
+            <p class="format-desc">Insights de especialistas em áudio. Conteúdo para ouvir enquanto você faz outra coisa.</p>
           </div>
         </div>
         <div class="format-card">
@@ -841,21 +1010,23 @@
     </div>
   </section>
 
-  <div class="divider"></div>
-
-  <!-- FORM SECTION -->
+  <!-- FORM / WAITLIST -->
   <div class="form-section" id="form">
     <div class="form-wrapper">
 
       <div id="form-container">
         <div id="form-creator-header" class="creator-content visible">
-          <h2 class="form-title">Seja um Creator<br/>Fundador.</h2>
-          <p class="form-sub">As primeiras vagas são limitadas. Creators fundadores entram com benefícios exclusivos e garantia de pool nos primeiros meses.</p>
+          <p class="form-tag">Acesso antecipado</p>
+          <h2 class="form-title">Entre na lista de<br/>Creators Fundadores.</h2>
+          <p class="form-sub">Os primeiros creators constroem a plataforma com a gente e garantem condições que não estarão disponíveis depois do lançamento público.</p>
         </div>
         <div id="form-consumer-header" class="consumer-content">
-          <h2 class="form-title">Acesso antecipado.</h2>
-          <p class="form-sub">Seja notificado quando a plataforma abrir. Os primeiros inscritos ganham desconto exclusivo na assinatura.</p>
+          <p class="form-tag">Acesso antecipado</p>
+          <h2 class="form-title">Você está a um passo<br/>de entrar antes de todo mundo.</h2>
+          <p class="form-sub">Alunos fundadores entram com vantagens exclusivas que não voltam depois. Cadastre-se agora para ser avisado no lançamento.</p>
         </div>
+
+        <p class="form-count"><strong>Seja um dos primeiros</strong> a garantir sua vaga.</p>
 
         <form id="waitlist-form" onsubmit="handleSubmit(event)">
           <input type="hidden" id="form-type" value="creator" />
@@ -866,7 +1037,7 @@
               <input type="text" id="name" placeholder="Como te chamam?" required />
             </div>
             <div class="form-group">
-              <label>E-mail</label>
+              <label>Seu melhor e-mail</label>
               <input type="email" id="email" placeholder="seu@email.com" required />
             </div>
           </div>
@@ -907,15 +1078,13 @@
             </div>
           </div>
 
-          <div id="consumer-fields">
-            <!-- consumer has only name + email -->
-          </div>
+          <div id="consumer-fields"></div>
 
           <button type="submit" class="submit-btn" id="submit-btn">
             Garantir minha vaga →
           </button>
 
-          <p class="form-note">Sem spam. Você receberá apenas o e-mail de confirmação e o aviso de abertura.</p>
+          <p class="form-note">Sem spam. Só o aviso quando a plataforma abrir e as condições de fundador.</p>
         </form>
       </div>
 
@@ -943,17 +1112,14 @@
     function switchTab(tab) {
       currentTab = tab;
 
-      // Update toggle buttons
       document.querySelectorAll('.tab-btn').forEach(btn => {
         btn.classList.toggle('active', btn.dataset.tab === tab);
       });
 
-      // Fade transition
       const fadeEl = document.getElementById('hero-content');
       fadeEl.classList.add('fading');
 
       setTimeout(() => {
-        // Show/hide content
         document.querySelectorAll('.creator-content').forEach(el => {
           el.classList.toggle('visible', tab === 'creator');
         });
@@ -961,19 +1127,13 @@
           el.classList.toggle('visible', tab === 'consumer');
         });
 
-        // Update form type
         document.getElementById('form-type').value = tab;
-
-        // Update creator-specific fields
         document.getElementById('creator-fields').classList.toggle('visible', tab === 'creator');
 
-        // Update hero CTA
         const cta = document.getElementById('hero-cta');
-        if (tab === 'creator') {
-          cta.textContent = 'Quero ser Creator Fundador';
-        } else {
-          cta.textContent = 'Quero acesso antecipado';
-        }
+        cta.textContent = tab === 'creator'
+          ? 'Quero ser Creator Fundador'
+          : 'Quero aprender e ser recompensado';
 
         fadeEl.classList.remove('fading');
       }, 200);
@@ -1015,7 +1175,7 @@
 
         if (currentTab === 'consumer') {
           document.getElementById('success-text').textContent =
-            'Você será notificado assim que a plataforma abrir. Fique de olho no e-mail.';
+            'Você será notificado quando a plataforma abrir. Alunos fundadores têm vantagens exclusivas — fique de olho no e-mail.';
         }
 
       } catch (err) {
