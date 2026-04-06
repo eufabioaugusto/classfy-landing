@@ -14,8 +14,11 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+    /* ========================
+       THEME VARIABLES
+    ======================== */
     :root {
-      --black: #000000;
+      --bg: #000000;
       --surface: #111111;
       --surface-2: #1a1a1a;
       --border: #262626;
@@ -25,28 +28,54 @@
       --red: #e01c4b;
       --red-hover: #c41540;
       --radius: 8px;
+      --nav-bg: rgba(0,0,0,0.9);
+      --hero-bg-1: rgba(224,28,75,0.12);
+      --hero-bg-2: rgba(224,28,75,0.05);
+      --badge-border: rgba(224,28,75,0.4);
+      --badge-color: var(--red);
+      --tab-bg: rgba(255,255,255,0.06);
+    }
+
+    /* LIGHT THEME (Quero Aprender) */
+    body.theme-light {
+      --bg: #f8f8f8;
+      --surface: #ffffff;
+      --surface-2: #f0f0f0;
+      --border: #e0e0e0;
+      --muted: #999999;
+      --text: #0a0a0a;
+      --text-soft: #555555;
+      --nav-bg: rgba(248,248,248,0.95);
+      --hero-bg-1: rgba(224,28,75,0.06);
+      --hero-bg-2: rgba(224,28,75,0.03);
+      --badge-border: rgba(224,28,75,0.5);
+      --tab-bg: rgba(0,0,0,0.06);
     }
 
     html { scroll-behavior: smooth; }
 
     body {
       font-family: 'Inter', system-ui, -apple-system, sans-serif;
-      background: var(--black);
+      background: var(--bg);
       color: var(--text);
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
+      transition: background 0.4s ease, color 0.3s ease;
     }
 
-    /* NAV */
+    /* ========================
+       NAV
+    ======================== */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
-      z-index: 100;
+      z-index: 200;
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 20px 40px;
-      background: linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, transparent 100%);
+      background: linear-gradient(to bottom, var(--nav-bg) 0%, transparent 100%);
+      transition: background 0.4s ease;
     }
 
     .nav-logo {
@@ -55,6 +84,7 @@
       letter-spacing: -0.5px;
       color: var(--text);
       text-decoration: none;
+      transition: color 0.3s;
     }
 
     .nav-right { display: flex; gap: 12px; align-items: center; }
@@ -74,23 +104,73 @@
     .btn-ghost:hover { border-color: var(--muted); color: var(--text); }
 
     /* ========================
-       HERO — FULL BLEED
+       HERO WRAPPER
     ======================== */
     .hero-wrapper {
       position: relative;
       overflow: hidden;
       background:
-        radial-gradient(ellipse 55% 70% at 75% 50%, rgba(224, 28, 75, 0.12) 0%, transparent 65%),
-        radial-gradient(ellipse 30% 40% at 15% 80%, rgba(224, 28, 75, 0.05) 0%, transparent 60%),
-        #000;
+        radial-gradient(ellipse 55% 70% at 75% 50%, var(--hero-bg-1) 0%, transparent 65%),
+        radial-gradient(ellipse 30% 40% at 15% 80%, var(--hero-bg-2) 0%, transparent 60%),
+        var(--bg);
+      transition: background 0.4s ease;
     }
 
+    /* TAB TOGGLE — centered above hero content */
+    .hero-tab-container {
+      position: absolute;
+      top: 72px;
+      left: 0; right: 0;
+      display: flex;
+      justify-content: center;
+      z-index: 150;
+      animation: fade-up 0.6s ease-out 0.1s both;
+    }
+
+    .tab-toggle {
+      display: inline-flex;
+      background: var(--tab-bg);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 5px;
+      transition: all 0.3s ease;
+    }
+
+    .tab-btn {
+      background: transparent;
+      border: none;
+      color: var(--muted);
+      padding: 11px 32px;
+      border-radius: 100px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      letter-spacing: -0.2px;
+      font-family: inherit;
+    }
+
+    /* Dark theme active = white pill */
+    body:not(.theme-light) .tab-btn.active {
+      background: var(--text);
+      color: #000;
+    }
+
+    /* Light theme active = black pill */
+    body.theme-light .tab-btn.active {
+      background: #0a0a0a;
+      color: #fff;
+    }
+
+    /* ========================
+       HERO GRID
+    ======================== */
     .hero {
       min-height: 100vh;
       display: grid;
       grid-template-columns: 1fr 1fr;
       align-items: stretch;
-      max-width: 1440px;
+      max-width: 1600px;
       margin: 0 auto;
     }
 
@@ -99,7 +179,7 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      padding: 120px 56px 80px 72px;
+      padding: 140px 64px 80px 96px;
       position: relative;
       z-index: 2;
     }
@@ -107,18 +187,19 @@
     .hero-badge {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      border: 1px solid rgba(224, 28, 75, 0.4);
+      gap: 8px;
+      border: 1px solid var(--badge-border);
       border-radius: 100px;
-      padding: 6px 16px;
+      padding: 7px 18px;
       font-size: 11px;
-      font-weight: 600;
+      font-weight: 700;
       color: var(--red);
-      margin-bottom: 32px;
+      margin-bottom: 36px;
       letter-spacing: 0.8px;
       text-transform: uppercase;
       width: fit-content;
-      animation: fade-up 0.6s ease-out 0.1s both;
+      animation: fade-up 0.6s ease-out 0.2s both;
+      transition: border-color 0.3s;
     }
 
     .hero-badge .dot {
@@ -127,50 +208,23 @@
       border-radius: 50%;
       background: var(--red);
       animation: pulse 2s ease-in-out infinite;
+      flex-shrink: 0;
     }
 
     @keyframes pulse {
       0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.5; transform: scale(0.8); }
-    }
-
-    /* TAB TOGGLE */
-    .tab-toggle {
-      display: inline-flex;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid var(--border);
-      border-radius: 100px;
-      padding: 4px;
-      margin-bottom: 28px;
-      width: fit-content;
-      animation: fade-up 0.6s ease-out 0.2s both;
-    }
-
-    .tab-btn {
-      background: transparent;
-      border: none;
-      color: var(--muted);
-      padding: 9px 24px;
-      border-radius: 100px;
-      font-size: 13px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.25s;
-      letter-spacing: 0.2px;
-    }
-
-    .tab-btn.active {
-      background: var(--text);
-      color: var(--black);
+      50% { opacity: 0.4; transform: scale(0.75); }
     }
 
     .hero-headline {
-      font-size: clamp(36px, 4vw, 64px);
+      font-size: clamp(38px, 4.2vw, 68px);
       font-weight: 900;
       line-height: 1.0;
       letter-spacing: -2.5px;
-      margin-bottom: 20px;
+      margin-bottom: 24px;
       animation: fade-up 0.6s ease-out 0.3s both;
+      color: var(--text);
+      transition: color 0.3s;
     }
 
     .hero-headline .accent {
@@ -182,8 +236,7 @@
     .hero-headline .accent::after {
       content: '';
       position: absolute;
-      bottom: 2px;
-      left: 0;
+      bottom: 2px; left: 0;
       width: 0%;
       height: 3px;
       background: var(--red);
@@ -194,13 +247,14 @@
     @keyframes underline-in { to { width: 100%; } }
 
     .hero-sub {
-      font-size: clamp(15px, 1.4vw, 17px);
+      font-size: clamp(15px, 1.4vw, 18px);
       color: var(--text-soft);
-      max-width: 440px;
-      margin-bottom: 40px;
+      max-width: 480px;
+      margin-bottom: 44px;
       font-weight: 400;
-      line-height: 1.75;
+      line-height: 1.8;
       animation: fade-up 0.6s ease-out 0.4s both;
+      transition: color 0.3s;
     }
 
     .hero-cta-group {
@@ -215,15 +269,16 @@
       background: var(--red);
       color: white;
       border: none;
-      padding: 16px 32px;
+      padding: 17px 36px;
       border-radius: var(--radius);
-      font-size: 15px;
+      font-size: 16px;
       font-weight: 700;
       cursor: pointer;
       text-decoration: none;
       display: inline-block;
       transition: all 0.2s;
       letter-spacing: -0.2px;
+      font-family: inherit;
     }
     .btn-primary:hover { background: var(--red-hover); transform: translateY(-1px); }
 
@@ -231,42 +286,45 @@
       background: transparent;
       color: var(--text-soft);
       border: none;
-      padding: 16px 20px;
+      padding: 17px 20px;
       font-size: 14px;
       cursor: pointer;
       text-decoration: none;
       display: inline-block;
+      transition: color 0.2s;
+      font-family: inherit;
     }
     .btn-secondary:hover { color: var(--text); }
 
-    /* RIGHT COLUMN — CREATOR CARDS */
+    /* ========================
+       RIGHT COLUMN — CREATOR CARDS
+    ======================== */
     .hero-right {
       position: relative;
       min-height: 100vh;
       display: flex;
       align-items: center;
-      padding: 100px 32px 40px 8px;
+      padding: 110px 40px 40px 8px;
       overflow: hidden;
     }
 
-    /* Left bleed gradient */
     .hero-right::before {
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(to right, rgba(0,0,0,0.7) 0%, transparent 20%);
+      background: linear-gradient(to right, var(--bg) 0%, transparent 18%);
       z-index: 2;
       pointer-events: none;
+      transition: background 0.4s;
     }
 
     .mosaic {
       display: flex;
       width: 100%;
       gap: 10px;
-      height: min(540px, calc(100vh - 160px));
+      height: min(560px, calc(100vh - 160px));
     }
 
-    /* Each creator card */
     .mosaic-item {
       flex: 1;
       position: relative;
@@ -274,11 +332,10 @@
       overflow: hidden;
       cursor: pointer;
       background: #111;
-      transition: transform 0.3s ease;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-    .mosaic-item:hover { transform: scale(1.02); }
+    .mosaic-item:hover { transform: scale(1.02); box-shadow: 0 20px 60px rgba(0,0,0,0.5); }
 
-    /* Background photo */
     .mosaic-bg {
       position: absolute;
       inset: 0;
@@ -288,29 +345,26 @@
     }
     .mosaic-item:hover .mosaic-bg { transform: scale(1.06); }
 
-    /* Dark gradient overlay — bottom heavy */
     .mosaic-bg::after {
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.45) 45%, transparent 100%);
+      background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.4) 50%, transparent 100%);
     }
 
-    /* Badge "New" */
     .mosaic-badge {
       position: absolute;
-      top: 14px;
-      left: 14px;
+      top: 14px; left: 14px;
       z-index: 3;
-      background: rgba(20,20,20,0.95);
+      background: rgba(15,15,15,0.9);
       color: #fff;
       font-size: 11px;
       font-weight: 700;
       padding: 4px 12px;
       border-radius: 999px;
+      backdrop-filter: blur(4px);
     }
 
-    /* Bottom content area */
     .mosaic-content {
       position: absolute;
       bottom: 0; left: 0; right: 0;
@@ -322,27 +376,25 @@
       text-align: center;
     }
 
-    /* Featured PNG logo/name */
     .mosaic-featured-img {
-      height: 56px;
+      height: 52px;
       width: auto;
       object-fit: contain;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
       filter: drop-shadow(0 2px 8px rgba(0,0,0,0.8));
     }
 
-    /* Separator */
     .mosaic-sep {
-      width: 40px;
+      width: 36px;
       height: 2px;
       background: rgba(255,255,255,0.35);
-      margin: 0 auto 12px;
+      margin: 0 auto 10px;
       border-radius: 1px;
     }
 
     .mosaic-desc {
-      font-size: 12px;
-      color: rgba(255,255,255,0.85);
+      font-size: 11px;
+      color: rgba(255,255,255,0.8);
       font-weight: 600;
       line-height: 1.4;
       display: -webkit-box;
@@ -351,28 +403,36 @@
       overflow: hidden;
     }
 
-    /* FADE-UP ANIMATION */
+    /* ========================
+       FADE-UP ANIMATION
+    ======================== */
     @keyframes fade-up {
       from { opacity: 0; transform: translateY(24px); }
       to   { opacity: 1; transform: translateY(0); }
     }
 
-    /* CONTENT VISIBILITY */
+    /* SCROLL REVEAL */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    /* ========================
+       CONTENT VISIBILITY (tabs)
+    ======================== */
     .creator-content, .consumer-content { display: none; }
     .creator-content.visible, .consumer-content.visible { display: block; }
     .fade-content { transition: opacity 0.2s ease; }
     .fade-content.fading { opacity: 0; }
-
-    /* ========================
-       DIVIDER
-    ======================== */
-    .divider {
-      width: 100%;
-      max-width: 1100px;
-      margin: 0 auto;
-      height: 1px;
-      background: var(--border);
-    }
 
     /* ========================
        PROBLEM SECTION
@@ -381,6 +441,7 @@
       padding: 80px 24px;
       border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
+      transition: border-color 0.3s, background 0.3s;
     }
 
     .problem-inner {
@@ -407,31 +468,29 @@
       letter-spacing: -1.5px;
       line-height: 1.1;
       margin-bottom: 20px;
+      color: var(--text);
+      transition: color 0.3s;
     }
-
     .problem-title span { color: var(--red); }
 
     .problem-desc {
       font-size: 16px;
       color: var(--text-soft);
       line-height: 1.75;
+      transition: color 0.3s;
     }
 
-    .problem-stats {
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
-    }
+    .problem-stats { display: flex; flex-direction: column; gap: 20px; }
 
     .problem-stat-item {
-      padding: 28px 32px;
+      padding: 24px 28px;
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 16px;
       position: relative;
       overflow: hidden;
+      transition: background 0.3s, border-color 0.3s;
     }
-
     .problem-stat-item::before {
       content: '';
       position: absolute;
@@ -441,18 +500,20 @@
     }
 
     .problem-stat-num {
-      font-size: 40px;
+      font-size: 38px;
       font-weight: 900;
       letter-spacing: -2px;
       line-height: 1;
       color: var(--text);
       margin-bottom: 6px;
+      transition: color 0.3s;
     }
 
     .problem-stat-label {
       font-size: 14px;
       color: var(--text-soft);
       line-height: 1.4;
+      transition: color 0.3s;
     }
 
     /* ========================
@@ -460,10 +521,7 @@
     ======================== */
     section { padding: 100px 24px; }
 
-    .container {
-      max-width: 1100px;
-      margin: 0 auto;
-    }
+    .container { max-width: 1100px; margin: 0 auto; }
 
     .section-label {
       font-size: 11px;
@@ -480,6 +538,8 @@
       letter-spacing: -1.5px;
       line-height: 1.1;
       margin-bottom: 16px;
+      color: var(--text);
+      transition: color 0.3s;
     }
 
     .section-sub {
@@ -487,10 +547,11 @@
       color: var(--text-soft);
       max-width: 540px;
       line-height: 1.7;
+      transition: color 0.3s;
     }
 
     /* ========================
-       HOW IT WORKS — CREATOR
+       STEPS
     ======================== */
     .steps-grid {
       display: grid;
@@ -504,8 +565,7 @@
       border: 1px solid var(--border);
       border-radius: 20px;
       padding: 36px 32px;
-      position: relative;
-      transition: border-color 0.2s;
+      transition: border-color 0.2s, background 0.3s;
     }
     .step-card:hover { border-color: var(--muted); }
 
@@ -519,8 +579,7 @@
     }
 
     .step-icon {
-      width: 48px;
-      height: 48px;
+      width: 48px; height: 48px;
       background: var(--surface-2);
       border: 1px solid var(--border);
       border-radius: 12px;
@@ -536,12 +595,15 @@
       font-weight: 700;
       margin-bottom: 10px;
       letter-spacing: -0.4px;
+      color: var(--text);
+      transition: color 0.3s;
     }
 
     .step-desc {
       font-size: 15px;
       color: var(--text-soft);
       line-height: 1.65;
+      transition: color 0.3s;
     }
 
     /* ========================
@@ -559,13 +621,12 @@
       align-items: center;
       position: relative;
       overflow: hidden;
+      transition: background 0.3s, border-color 0.3s;
     }
-
     .pool-section::before {
       content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse 60% 80% at 100% 50%, rgba(224, 28, 75, 0.07) 0%, transparent 70%);
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 60% 80% at 100% 50%, rgba(224,28,75,0.07) 0%, transparent 70%);
       pointer-events: none;
     }
 
@@ -575,27 +636,29 @@
       letter-spacing: -1.5px;
       line-height: 1.1;
       margin-bottom: 16px;
+      color: var(--text);
+      transition: color 0.3s;
     }
-
     .pool-title span { color: var(--red); }
 
     .pool-desc {
       font-size: 15px;
       color: var(--text-soft);
       line-height: 1.75;
-      margin-bottom: 32px;
+      margin-bottom: 28px;
+      transition: color 0.3s;
     }
 
     .pool-formula {
       background: var(--surface-2);
       border: 1px solid var(--border);
       border-radius: 10px;
-      padding: 16px 20px;
+      padding: 14px 18px;
       font-size: 13px;
       color: var(--text-soft);
-      margin-bottom: 10px;
+      margin-bottom: 8px;
+      transition: background 0.3s, border-color 0.3s;
     }
-
     .pool-formula code {
       color: var(--text);
       font-family: 'SF Mono', 'Fira Code', monospace;
@@ -608,6 +671,7 @@
       background: var(--surface-2);
       border: 1px solid var(--border);
       border-radius: 20px;
+      transition: background 0.3s, border-color 0.3s;
     }
 
     .pool-stat-num {
@@ -623,6 +687,121 @@
       font-size: 14px;
       color: var(--text-soft);
       line-height: 1.5;
+      transition: color 0.3s;
+    }
+
+    /* ========================
+       POOL SIMULATOR
+    ======================== */
+    .simulator {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 48px 52px;
+      margin-top: 20px;
+      transition: background 0.3s, border-color 0.3s;
+    }
+
+    .simulator-title {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.8px;
+      margin-bottom: 6px;
+      color: var(--text);
+      transition: color 0.3s;
+    }
+
+    .simulator-sub {
+      font-size: 14px;
+      color: var(--text-soft);
+      margin-bottom: 36px;
+      transition: color 0.3s;
+    }
+
+    .sim-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      margin-bottom: 32px;
+    }
+
+    .sim-field label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-soft);
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      transition: color 0.3s;
+    }
+
+    .sim-field label span {
+      color: var(--text);
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .sim-slider {
+      width: 100%;
+      appearance: none;
+      height: 4px;
+      background: var(--border);
+      border-radius: 2px;
+      outline: none;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .sim-slider::-webkit-slider-thumb {
+      appearance: none;
+      width: 18px;
+      height: 18px;
+      background: var(--red);
+      border-radius: 50%;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(224,28,75,0.4);
+    }
+
+    .sim-result {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px 32px;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 24px;
+      text-align: center;
+      margin-bottom: 20px;
+      transition: background 0.3s, border-color 0.3s;
+    }
+
+    .sim-result-item .val {
+      font-size: 28px;
+      font-weight: 900;
+      letter-spacing: -1px;
+      color: var(--red);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .sim-result-item .lbl {
+      font-size: 12px;
+      color: var(--text-soft);
+      line-height: 1.4;
+      transition: color 0.3s;
+    }
+
+    .sim-disclaimer {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.5;
+      padding: 12px 16px;
+      background: var(--surface-2);
+      border-radius: 8px;
+      border-left: 3px solid var(--border);
+      transition: background 0.3s, color 0.3s;
     }
 
     /* ========================
@@ -643,15 +822,14 @@
       display: flex;
       gap: 20px;
       align-items: flex-start;
-      transition: border-color 0.2s;
+      transition: border-color 0.2s, background 0.3s;
     }
     .format-card:hover { border-color: var(--muted); }
 
     .format-icon {
       font-size: 24px;
       flex-shrink: 0;
-      width: 52px;
-      height: 52px;
+      width: 52px; height: 52px;
       background: var(--surface-2);
       border-radius: 12px;
       display: flex;
@@ -659,11 +837,11 @@
       justify-content: center;
     }
 
-    .format-title { font-size: 17px; font-weight: 700; margin-bottom: 6px; letter-spacing: -0.3px; }
-    .format-desc { font-size: 14px; color: var(--text-soft); line-height: 1.55; }
+    .format-title { font-size: 17px; font-weight: 700; margin-bottom: 6px; letter-spacing: -0.3px; color: var(--text); transition: color 0.3s; }
+    .format-desc { font-size: 14px; color: var(--text-soft); line-height: 1.55; transition: color 0.3s; }
 
     /* ========================
-       WAITLIST / FORM
+       WAITLIST
     ======================== */
     .form-section {
       min-height: 100vh;
@@ -673,20 +851,17 @@
       padding: 80px 24px;
       position: relative;
       background:
-        radial-gradient(ellipse 70% 60% at 50% 100%, rgba(224, 28, 75, 0.18) 0%, transparent 65%),
-        #000;
+        radial-gradient(ellipse 70% 60% at 50% 100%, rgba(224,28,75,0.18) 0%, transparent 65%),
+        var(--bg);
       border-top: 1px solid var(--border);
+      transition: background 0.4s, border-color 0.3s;
     }
 
-    .form-wrapper {
-      max-width: 600px;
-      width: 100%;
-      text-align: center;
-    }
+    .form-wrapper { max-width: 600px; width: 100%; text-align: center; }
 
     .form-tag {
       display: inline-block;
-      border: 1px solid rgba(224, 28, 75, 0.5);
+      border: 1px solid rgba(224,28,75,0.5);
       color: var(--red);
       font-size: 11px;
       font-weight: 700;
@@ -703,19 +878,19 @@
       letter-spacing: -2px;
       line-height: 1.05;
       margin-bottom: 16px;
+      color: var(--text);
+      transition: color 0.3s;
     }
 
     .form-sub {
       font-size: 17px;
       color: var(--text-soft);
-      margin-bottom: 48px;
+      margin-bottom: 40px;
       line-height: 1.65;
+      transition: color 0.3s;
     }
 
-    .form-group {
-      margin-bottom: 14px;
-      text-align: left;
-    }
+    .form-group { margin-bottom: 14px; text-align: left; }
 
     .form-group label {
       display: block;
@@ -725,27 +900,27 @@
       margin-bottom: 8px;
       letter-spacing: 0.3px;
       text-transform: uppercase;
+      transition: color 0.3s;
     }
 
     .form-group input,
     .form-group select {
       width: 100%;
-      background: rgba(255,255,255,0.06);
+      background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--radius);
       padding: 14px 16px;
       font-size: 15px;
       color: var(--text);
       font-family: inherit;
-      transition: border-color 0.2s;
+      transition: border-color 0.2s, background 0.3s, color 0.3s;
       outline: none;
       appearance: none;
     }
-
     .form-group input::placeholder { color: var(--muted); }
     .form-group input:focus,
     .form-group select:focus { border-color: rgba(224,28,75,0.6); }
-    .form-group select option { background: #111; }
+    .form-group select option { background: var(--surface); color: var(--text); }
 
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 
@@ -770,32 +945,19 @@
     .submit-btn:hover { background: var(--red-hover); transform: translateY(-1px); }
     .submit-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
 
-    .form-note {
-      font-size: 13px;
-      color: var(--muted);
-      margin-top: 16px;
-      line-height: 1.5;
-    }
-
-    .form-count {
-      font-size: 14px;
-      color: var(--text-soft);
-      margin-bottom: 32px;
-    }
+    .form-note { font-size: 13px; color: var(--muted); margin-top: 16px; line-height: 1.5; }
+    .form-count { font-size: 14px; color: var(--text-soft); margin-bottom: 32px; }
     .form-count strong { color: var(--text); font-weight: 700; }
 
-    /* SUCCESS STATE */
-    .success-message {
-      display: none;
-      text-align: center;
-      padding: 40px;
-    }
+    .success-message { display: none; text-align: center; padding: 40px; }
     .success-message.visible { display: block; }
     .success-icon { font-size: 48px; margin-bottom: 16px; }
-    .success-title { font-size: 28px; font-weight: 800; letter-spacing: -1px; margin-bottom: 8px; }
+    .success-title { font-size: 28px; font-weight: 800; letter-spacing: -1px; margin-bottom: 8px; color: var(--text); }
     .success-sub { color: var(--text-soft); font-size: 16px; line-height: 1.6; }
 
-    /* FOOTER */
+    /* ========================
+       FOOTER
+    ======================== */
     footer {
       padding: 40px 24px;
       border-top: 1px solid var(--border);
@@ -804,8 +966,8 @@
       justify-content: space-between;
       max-width: 1100px;
       margin: 0 auto;
+      transition: border-color 0.3s;
     }
-
     .footer-logo { font-size: 16px; font-weight: 700; color: var(--text-soft); }
     .footer-copy { font-size: 13px; color: var(--muted); }
 
@@ -814,27 +976,26 @@
     ======================== */
     @media (max-width: 960px) {
       .hero { grid-template-columns: 1fr; }
-      .hero-left { padding: 110px 32px 60px; }
+      .hero-left { padding: 130px 32px 60px; }
       .hero-right { min-height: 60vw; }
-      .hero-right::before {
-        background: linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, transparent 30%, transparent 70%, rgba(0,0,0,0.7) 100%);
-      }
       .problem-inner { grid-template-columns: 1fr; gap: 48px; }
+      .sim-grid { grid-template-columns: 1fr; }
+      .sim-result { grid-template-columns: 1fr; gap: 16px; }
     }
 
     @media (max-width: 768px) {
       nav { padding: 16px 20px; }
-      .hero-left { padding: 100px 24px 48px; }
-      .hero-right { min-height: 50vw; }
+      .hero-tab-container { top: 60px; }
       .pool-section { grid-template-columns: 1fr; padding: 36px 28px; gap: 36px; }
       .formats-grid { grid-template-columns: 1fr; }
       .form-row { grid-template-columns: 1fr; }
       section { padding: 72px 20px; }
       footer { flex-direction: column; gap: 12px; text-align: center; }
+      .simulator { padding: 32px 24px; }
     }
   </style>
 </head>
-<body>
+<body class="theme-dark">
 
   <!-- NAV -->
   <nav>
@@ -846,16 +1007,20 @@
 
   <!-- HERO -->
   <div class="hero-wrapper">
+
+    <!-- TAB TOGGLE — centered at top -->
+    <div class="hero-tab-container">
+      <div class="tab-toggle">
+        <button class="tab-btn active" data-tab="creator" onclick="switchTab('creator')">Sou Creator</button>
+        <button class="tab-btn" data-tab="consumer" onclick="switchTab('consumer')">Quero Aprender</button>
+      </div>
+    </div>
+
     <div class="hero">
       <!-- LEFT COLUMN -->
       <div class="hero-left">
         <div class="hero-badge">
           <span class="dot"></span> Lançamento em breve — vagas limitadas
-        </div>
-
-        <div class="tab-toggle">
-          <button class="tab-btn active" data-tab="creator" onclick="switchTab('creator')">Sou Creator</button>
-          <button class="tab-btn" data-tab="consumer" onclick="switchTab('consumer')">Quero Aprender</button>
         </div>
 
         <div class="fade-content" id="hero-content">
@@ -864,7 +1029,6 @@
             <h1 class="hero-headline">A plataforma que paga<br/>pelo que você <span class="accent">entrega</span>,<br/>não pelo que ela decide.</h1>
             <p class="hero-sub">Todo mês, 40% da receita total da Classfy é distribuído entre os creators por performance real. Fórmula pública. Sem algoritmo que te penaliza.</p>
           </div>
-
           <!-- CONSUMER -->
           <div class="consumer-content" id="consumer-hero">
             <h1 class="hero-headline">Você aprende.<br/>Você avança.<br/>Você é <span class="accent">recompensado</span>.</h1>
@@ -878,10 +1042,9 @@
         </div>
       </div>
 
-      <!-- RIGHT COLUMN — PHOTO MOSAIC -->
+      <!-- RIGHT COLUMN -->
       <div class="hero-right">
         <div class="mosaic">
-          <!-- Cindy Ribas -->
           <div class="mosaic-item">
             <div class="mosaic-bg" style="background-image: url('https://vhmurjknxaacjmvfkjbw.supabase.co/storage/v1/object/public/featured-creators/background-1766966339259.jpg')"></div>
             <span class="mosaic-badge">New</span>
@@ -891,7 +1054,6 @@
               <p class="mosaic-desc">Encontre a Luz do seu Poder Pessoal</p>
             </div>
           </div>
-          <!-- Fabio Augusto -->
           <div class="mosaic-item">
             <div class="mosaic-bg" style="background-image: url('https://vhmurjknxaacjmvfkjbw.supabase.co/storage/v1/object/public/featured-creators/background-1767274253485.jpg')"></div>
             <span class="mosaic-badge">New</span>
@@ -901,7 +1063,6 @@
               <p class="mosaic-desc">Construa sua Mentalidade Digital</p>
             </div>
           </div>
-          <!-- Sol Mayumi -->
           <div class="mosaic-item">
             <div class="mosaic-bg" style="background-image: url('https://vhmurjknxaacjmvfkjbw.supabase.co/storage/v1/object/public/featured-creators/background-1767627236172.jpg')"></div>
             <span class="mosaic-badge">New</span>
@@ -919,22 +1080,22 @@
   <!-- PROBLEM -->
   <div class="problem-section">
     <div class="problem-inner">
-      <div>
+      <div class="reveal">
         <p class="problem-label">O problema que ninguém resolve</p>
         <h2 class="problem-title">Criadores trabalhando duro.<br/>Plataformas decidindo <span>quanto valem</span>.</h2>
         <p class="problem-desc">CPM arbitrário, algoritmo que penaliza quem não paga por tráfego, curadoria subjetiva — o modelo atual favorece a plataforma, não quem cria. E o aluno? Paga, assiste, e não recebe nada em troca do seu tempo e dedicação.</p>
       </div>
       <div class="problem-stats">
-        <div class="problem-stat-item">
-          <div class="problem-stat-num">40%</div>
+        <div class="problem-stat-item reveal reveal-delay-1">
+          <div class="problem-stat-num counter" data-target="40" data-suffix="%">0%</div>
           <div class="problem-stat-label">da receita total distribuída mensalmente — fórmula pública e imutável</div>
         </div>
-        <div class="problem-stat-item">
+        <div class="problem-stat-item reveal reveal-delay-2">
           <div class="problem-stat-num">R$ 0</div>
           <div class="problem-stat-label">de taxa para entrar como creator — sem mensalidade, sem custo de publicação</div>
         </div>
-        <div class="problem-stat-item">
-          <div class="problem-stat-num">2×</div>
+        <div class="problem-stat-item reveal reveal-delay-3">
+          <div class="problem-stat-num counter" data-target="2" data-suffix="×">0×</div>
           <div class="problem-stat-label">a Classfy é a única plataforma onde criadores e alunos ganham ao mesmo tempo</div>
         </div>
       </div>
@@ -944,24 +1105,24 @@
   <!-- HOW IT WORKS — CREATOR -->
   <section id="como-funciona" class="creator-content visible">
     <div class="container">
-      <p class="section-label">Para Creators</p>
-      <h2 class="section-title">Como o pool funciona<br/>para você</h2>
-      <p class="section-sub">Sem CPM arbitrário. Sem algoritmo que te penaliza. Sua participação é proporcional ao seu impacto real.</p>
+      <p class="section-label reveal">Para Creators</p>
+      <h2 class="section-title reveal">Como o pool funciona<br/>para você</h2>
+      <p class="section-sub reveal">Sem CPM arbitrário. Sem algoritmo que te penaliza. Sua participação é proporcional ao seu impacto real.</p>
 
       <div class="steps-grid">
-        <div class="step-card">
+        <div class="step-card reveal reveal-delay-1">
           <div class="step-number">Passo 01</div>
           <div class="step-icon">📹</div>
           <h3 class="step-title">Publique seu conteúdo</h3>
           <p class="step-desc">Aulas, cursos completos, shorts, podcasts ou lives. Qualquer formato, qualquer nicho. Você cria, a plataforma distribui.</p>
         </div>
-        <div class="step-card">
+        <div class="step-card reveal reveal-delay-2">
           <div class="step-number">Passo 02</div>
           <div class="step-icon">⚡</div>
           <h3 class="step-title">Acumule Performance Points</h3>
           <p class="step-desc">Visualizações, tempo de conclusão, engajamento real. Quanto melhor seu conteúdo, mais PP você acumula. Os critérios são fixos e públicos.</p>
         </div>
-        <div class="step-card">
+        <div class="step-card reveal reveal-delay-3">
           <div class="step-number">Passo 03</div>
           <div class="step-icon">💰</div>
           <h3 class="step-title">Receba sua fatia do pool</h3>
@@ -969,7 +1130,8 @@
         </div>
       </div>
 
-      <div class="pool-section">
+      <!-- POOL -->
+      <div class="pool-section reveal">
         <div>
           <h3 class="pool-title">O pool que<br/><span>não mente</span>.</h3>
           <p class="pool-desc">A maioria das plataformas decide quanto você recebe nos bastidores. Aqui a conta é aberta. Sem ajuste discricionário. Sem corte surpresa. Se a Classfy cresce, você cresce junto — matematicamente.</p>
@@ -982,9 +1144,53 @@
         </div>
         <div>
           <div class="pool-stat">
-            <div class="pool-stat-num">40%</div>
+            <div class="pool-stat-num counter" data-target="40" data-suffix="%">0%</div>
             <div class="pool-stat-label">da receita total vai para<br/>creators e alunos todo mês</div>
           </div>
+        </div>
+      </div>
+
+      <!-- SIMULADOR -->
+      <div class="simulator reveal">
+        <div class="simulator-title">Simule seu ganho</div>
+        <div class="simulator-sub">Ajuste os valores e veja uma estimativa do que você poderia receber como creator.</div>
+
+        <div class="sim-grid">
+          <div class="sim-field">
+            <label>Conteúdos por mês <span id="val-conteudos">4</span></label>
+            <input type="range" class="sim-slider" id="slider-conteudos" min="1" max="30" value="4" oninput="updateSim()" />
+          </div>
+          <div class="sim-field">
+            <label>Visualizações por conteúdo <span id="val-views">500</span></label>
+            <input type="range" class="sim-slider" id="slider-views" min="100" max="50000" step="100" value="500" oninput="updateSim()" />
+          </div>
+          <div class="sim-field">
+            <label>Pool estimado do mês <span id="val-pool">R$ 10.000</span></label>
+            <input type="range" class="sim-slider" id="slider-pool" min="5000" max="200000" step="1000" value="10000" oninput="updateSim()" />
+          </div>
+          <div class="sim-field">
+            <label>Total de creators ativos <span id="val-creators">50</span></label>
+            <input type="range" class="sim-slider" id="slider-creators" min="10" max="500" step="5" value="50" oninput="updateSim()" />
+          </div>
+        </div>
+
+        <div class="sim-result">
+          <div class="sim-result-item">
+            <div class="val" id="sim-pp">2.000</div>
+            <div class="lbl">Seus PP estimados</div>
+          </div>
+          <div class="sim-result-item">
+            <div class="val" id="sim-share">0,40%</div>
+            <div class="lbl">Participação no pool</div>
+          </div>
+          <div class="sim-result-item">
+            <div class="val" id="sim-ganho">R$ 40</div>
+            <div class="lbl">Estimativa de ganho</div>
+          </div>
+        </div>
+
+        <div class="sim-disclaimer">
+          ⚠️ Valores ilustrativos. O ganho real depende do pool total da plataforma, da performance de todos os creators ativos, do engajamento real do seu conteúdo e das regras de distribuição vigentes. Este simulador é apenas uma ferramenta de estimativa.
         </div>
       </div>
     </div>
@@ -993,33 +1199,33 @@
   <!-- WHAT'S INSIDE — CONSUMER -->
   <section id="para-alunos" class="consumer-content">
     <div class="container">
-      <p class="section-label">Para Quem Quer Aprender</p>
-      <h2 class="section-title">Aprenda com quem<br/>realmente sabe.<br/>E seja pago por isso.</h2>
-      <p class="section-sub">Cada conteúdo consumido com atenção gera Performance Points. Esses pontos valem participação no pool mensal — reconhecimento real por dedicação real.</p>
+      <p class="section-label reveal">Para Quem Quer Aprender</p>
+      <h2 class="section-title reveal">Aprenda com quem<br/>realmente sabe.<br/>E seja pago por isso.</h2>
+      <p class="section-sub reveal">Cada conteúdo consumido com atenção gera Performance Points. Esses pontos valem participação no pool mensal — reconhecimento real por dedicação real.</p>
 
       <div class="formats-grid">
-        <div class="format-card">
+        <div class="format-card reveal reveal-delay-1">
           <div class="format-icon">⚡</div>
           <div>
             <h3 class="format-title">Shorts</h3>
             <p class="format-desc">Conhecimento concentrado em até 3 minutos. Perfeito para aprender no intervalo ou no transporte.</p>
           </div>
         </div>
-        <div class="format-card">
+        <div class="format-card reveal reveal-delay-2">
           <div class="format-icon">🎓</div>
           <div>
             <h3 class="format-title">Cursos</h3>
             <p class="format-desc">Trilhas completas com módulos, aulas e certificado. Do iniciante ao avançado, em qualquer nicho.</p>
           </div>
         </div>
-        <div class="format-card">
+        <div class="format-card reveal reveal-delay-1">
           <div class="format-icon">🎙️</div>
           <div>
             <h3 class="format-title">Podcasts</h3>
             <p class="format-desc">Insights de especialistas em áudio. Conteúdo para ouvir enquanto você faz outra coisa.</p>
           </div>
         </div>
-        <div class="format-card">
+        <div class="format-card reveal reveal-delay-2">
           <div class="format-icon">🔴</div>
           <div>
             <h3 class="format-title">Lives</h3>
@@ -1032,7 +1238,7 @@
 
   <!-- FORM / WAITLIST -->
   <div class="form-section" id="form">
-    <div class="form-wrapper">
+    <div class="form-wrapper reveal">
 
       <div id="form-container">
         <div id="form-creator-header" class="creator-content visible">
@@ -1124,18 +1330,35 @@
   </footer>
 
   <script>
+    /* ========================
+       SUPABASE
+    ======================== */
     const SUPABASE_URL = 'https://jeqezibfollsvdknfebj.supabase.co';
     const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImplcWV6aWJmb2xsc3Zka25mZWJqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUzNzQ3MjYsImV4cCI6MjA5MDk1MDcyNn0.AggWYx0V-N1vtjh_Ynxuw60_OwgJM8lEvsHsqCSMlus';
 
+    /* ========================
+       TAB SWITCH + THEME
+    ======================== */
     let currentTab = 'creator';
 
     function switchTab(tab) {
       currentTab = tab;
 
+      // Update buttons
       document.querySelectorAll('.tab-btn').forEach(btn => {
         btn.classList.toggle('active', btn.dataset.tab === tab);
       });
 
+      // Theme: creator = dark, consumer = light
+      if (tab === 'consumer') {
+        document.body.classList.remove('theme-dark');
+        document.body.classList.add('theme-light');
+      } else {
+        document.body.classList.remove('theme-light');
+        document.body.classList.add('theme-dark');
+      }
+
+      // Fade transition for hero content
       const fadeEl = document.getElementById('hero-content');
       fadeEl.classList.add('fading');
 
@@ -1156,9 +1379,91 @@
           : 'Quero aprender e ser recompensado';
 
         fadeEl.classList.remove('fading');
-      }, 200);
+      }, 220);
     }
 
+    /* ========================
+       SCROLL REVEAL
+    ======================== */
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    /* ========================
+       COUNTER ANIMATION
+    ======================== */
+    function animateCounter(el) {
+      const target = parseFloat(el.dataset.target);
+      const suffix = el.dataset.suffix || '';
+      const duration = 1400;
+      const start = performance.now();
+
+      function update(now) {
+        const elapsed = now - start;
+        const progress = Math.min(elapsed / duration, 1);
+        // ease-out cubic
+        const eased = 1 - Math.pow(1 - progress, 3);
+        const current = Math.round(eased * target * 10) / 10;
+        el.textContent = (Number.isInteger(target) ? Math.round(current) : current) + suffix;
+        if (progress < 1) requestAnimationFrame(update);
+      }
+
+      requestAnimationFrame(update);
+    }
+
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !entry.target.dataset.counted) {
+          entry.target.dataset.counted = 'true';
+          animateCounter(entry.target);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    document.querySelectorAll('.counter').forEach(el => counterObserver.observe(el));
+
+    /* ========================
+       POOL SIMULATOR
+    ======================== */
+    function updateSim() {
+      const conteudos = parseInt(document.getElementById('slider-conteudos').value);
+      const viewsPerContent = parseInt(document.getElementById('slider-views').value);
+      const pool = parseInt(document.getElementById('slider-pool').value);
+      const totalCreators = parseInt(document.getElementById('slider-creators').value);
+
+      // Update labels
+      document.getElementById('val-conteudos').textContent = conteudos;
+      document.getElementById('val-views').textContent = viewsPerContent >= 1000
+        ? (viewsPerContent / 1000).toFixed(1) + 'k'
+        : viewsPerContent;
+      document.getElementById('val-pool').textContent = 'R$ ' + pool.toLocaleString('pt-BR');
+      document.getElementById('val-creators').textContent = totalCreators;
+
+      // PP estimation: views × 1 PP, plus bonus for content count
+      const myPP = conteudos * viewsPerContent;
+      // Avg creator: assume average creator has similar views
+      const avgPP = myPP; // simplified: assume you're average
+      const totalPP = totalCreators * avgPP;
+      const share = totalPP > 0 ? (myPP / totalPP) : 0;
+      const ganho = share * pool;
+
+      document.getElementById('sim-pp').textContent = myPP.toLocaleString('pt-BR');
+      document.getElementById('sim-share').textContent = (share * 100).toFixed(2) + '%';
+      document.getElementById('sim-ganho').textContent = 'R$ ' + Math.round(ganho).toLocaleString('pt-BR');
+    }
+
+    // Init simulator
+    updateSim();
+
+    /* ========================
+       FORM SUBMIT
+    ======================== */
     async function handleSubmit(e) {
       e.preventDefault();
 
