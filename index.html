@@ -313,8 +313,7 @@
       min-height: 100vh;
       display: flex;
       align-items: center;
-      padding: 110px 40px 40px 8px;
-      overflow: hidden;
+      padding: 110px 48px 40px 8px;
     }
 
 
@@ -334,7 +333,8 @@
       background: #111;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-    .mosaic-item:hover { transform: scale(1.02); box-shadow: 0 20px 60px rgba(0,0,0,0.5); }
+    .mosaic-item:hover { transform: scale(1.02); box-shadow: 0 16px 48px rgba(0,0,0,0.25); }
+    body.theme-light .mosaic-item:hover { box-shadow: 0 16px 48px rgba(0,0,0,0.15); }
 
     .mosaic-bg {
       position: absolute;
