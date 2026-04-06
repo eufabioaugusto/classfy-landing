@@ -768,9 +768,9 @@
       background: var(--surface-2);
       border: 1px solid var(--border);
       border-radius: 16px;
-      padding: 28px 32px;
+      padding: 32px;
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
       gap: 24px;
       text-align: center;
       margin-bottom: 20px;
@@ -778,12 +778,12 @@
     }
 
     .sim-result-item .val {
-      font-size: 28px;
+      font-size: 36px;
       font-weight: 900;
-      letter-spacing: -1px;
+      letter-spacing: -1.5px;
       color: var(--red);
       line-height: 1;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
     }
 
     .sim-result-item .lbl {
@@ -975,9 +975,39 @@
        RESPONSIVE
     ======================== */
     @media (max-width: 960px) {
-      .hero { grid-template-columns: 1fr; }
-      .hero-left { padding: 130px 32px 60px; }
-      .hero-right { min-height: 60vw; }
+      .hero { grid-template-columns: 1fr; min-height: auto; }
+      .hero-left {
+        padding: 160px 28px 40px;
+        align-items: center;
+        text-align: center;
+      }
+      .hero-left .hero-badge { margin-left: auto; margin-right: auto; }
+      .hero-left .hero-cta-group { justify-content: center; }
+      .hero-left .hero-sub { max-width: 100%; }
+      .hero-right {
+        min-height: auto;
+        padding: 0 0 48px 0;
+        overflow: hidden;
+      }
+      /* Mosaic: scrollable, show 1.5 cards */
+      .mosaic {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        height: 420px;
+        gap: 12px;
+        padding: 0 20px;
+        scrollbar-width: none;
+      }
+      .mosaic::-webkit-scrollbar { display: none; }
+      .mosaic-item {
+        min-width: 65vw;
+        max-width: 65vw;
+        scroll-snap-align: start;
+        flex-shrink: 0;
+      }
+      .hero-right::before { display: none; }
       .problem-inner { grid-template-columns: 1fr; gap: 48px; }
       .sim-grid { grid-template-columns: 1fr; }
       .sim-result { grid-template-columns: 1fr; gap: 16px; }
@@ -985,7 +1015,7 @@
 
     @media (max-width: 768px) {
       nav { padding: 16px 20px; }
-      .hero-tab-container { top: 60px; }
+      .hero-tab-container { top: 68px; }
       .pool-section { grid-template-columns: 1fr; padding: 36px 28px; gap: 36px; }
       .formats-grid { grid-template-columns: 1fr; }
       .form-row { grid-template-columns: 1fr; }
@@ -1152,45 +1182,33 @@
 
       <!-- SIMULADOR -->
       <div class="simulator reveal">
-        <div class="simulator-title">Simule seu ganho</div>
-        <div class="simulator-sub">Ajuste os valores e veja uma estimativa do que você poderia receber como creator.</div>
+        <div class="simulator-title">Simule seu potencial de ganho</div>
+        <div class="simulator-sub">Quanto mais você publica e engaja, maior sua fatia do pool.</div>
 
         <div class="sim-grid">
           <div class="sim-field">
-            <label>Conteúdos por mês <span id="val-conteudos">4</span></label>
-            <input type="range" class="sim-slider" id="slider-conteudos" min="1" max="30" value="4" oninput="updateSim()" />
+            <label>Visualizações mensais <span id="val-views">5.000</span></label>
+            <input type="range" class="sim-slider" id="slider-views" min="1000" max="200000" step="500" value="5000" oninput="updateSim()" />
           </div>
           <div class="sim-field">
-            <label>Visualizações por conteúdo <span id="val-views">500</span></label>
-            <input type="range" class="sim-slider" id="slider-views" min="100" max="50000" step="100" value="500" oninput="updateSim()" />
-          </div>
-          <div class="sim-field">
-            <label>Pool estimado do mês <span id="val-pool">R$ 10.000</span></label>
-            <input type="range" class="sim-slider" id="slider-pool" min="5000" max="200000" step="1000" value="10000" oninput="updateSim()" />
-          </div>
-          <div class="sim-field">
-            <label>Total de creators ativos <span id="val-creators">50</span></label>
-            <input type="range" class="sim-slider" id="slider-creators" min="10" max="500" step="5" value="50" oninput="updateSim()" />
+            <label>Pool estimado do mês <span id="val-pool">R$ 20.000</span></label>
+            <input type="range" class="sim-slider" id="slider-pool" min="5000" max="200000" step="1000" value="20000" oninput="updateSim()" />
           </div>
         </div>
 
         <div class="sim-result">
           <div class="sim-result-item">
-            <div class="val" id="sim-pp">2.000</div>
-            <div class="lbl">Seus PP estimados</div>
+            <div class="val" id="sim-ganho">R$ 400</div>
+            <div class="lbl">Estimativa de ganho mensal</div>
           </div>
           <div class="sim-result-item">
-            <div class="val" id="sim-share">0,40%</div>
-            <div class="lbl">Participação no pool</div>
-          </div>
-          <div class="sim-result-item">
-            <div class="val" id="sim-ganho">R$ 40</div>
-            <div class="lbl">Estimativa de ganho</div>
+            <div class="val" id="sim-share">1,67%</div>
+            <div class="lbl">Participação estimada no pool</div>
           </div>
         </div>
 
         <div class="sim-disclaimer">
-          ⚠️ Valores ilustrativos. O ganho real depende do pool total da plataforma, da performance de todos os creators ativos, do engajamento real do seu conteúdo e das regras de distribuição vigentes. Este simulador é apenas uma ferramenta de estimativa.
+          Valores ilustrativos baseados na hipótese de 300.000 visualizações totais na plataforma por mês. O ganho real depende do engajamento, conclusões de aula e performance relativa entre todos os creators ativos.
         </div>
       </div>
     </div>
@@ -1431,31 +1449,26 @@
     /* ========================
        POOL SIMULATOR
     ======================== */
+    // Platform assumed total views: 300,000/month (disclosed in disclaimer)
+    const PLATFORM_VIEWS = 300000;
+
     function updateSim() {
-      const conteudos = parseInt(document.getElementById('slider-conteudos').value);
-      const viewsPerContent = parseInt(document.getElementById('slider-views').value);
-      const pool = parseInt(document.getElementById('slider-pool').value);
-      const totalCreators = parseInt(document.getElementById('slider-creators').value);
+      const views = parseInt(document.getElementById('slider-views').value);
+      const pool  = parseInt(document.getElementById('slider-pool').value);
 
-      // Update labels
-      document.getElementById('val-conteudos').textContent = conteudos;
-      document.getElementById('val-views').textContent = viewsPerContent >= 1000
-        ? (viewsPerContent / 1000).toFixed(1) + 'k'
-        : viewsPerContent;
+      // Labels
+      document.getElementById('val-views').textContent = views >= 1000
+        ? (views / 1000).toLocaleString('pt-BR', { maximumFractionDigits: 1 }) + '.000'
+        : views;
       document.getElementById('val-pool').textContent = 'R$ ' + pool.toLocaleString('pt-BR');
-      document.getElementById('val-creators').textContent = totalCreators;
 
-      // PP estimation: views × 1 PP, plus bonus for content count
-      const myPP = conteudos * viewsPerContent;
-      // Avg creator: assume average creator has similar views
-      const avgPP = myPP; // simplified: assume you're average
-      const totalPP = totalCreators * avgPP;
-      const share = totalPP > 0 ? (myPP / totalPP) : 0;
+      // Formula: engaged creator gets 1.2× boost on their views (quality bonus)
+      const effectiveViews = views * 1.2;
+      const share = Math.min(effectiveViews / PLATFORM_VIEWS, 1);
       const ganho = share * pool;
 
-      document.getElementById('sim-pp').textContent = myPP.toLocaleString('pt-BR');
-      document.getElementById('sim-share').textContent = (share * 100).toFixed(2) + '%';
       document.getElementById('sim-ganho').textContent = 'R$ ' + Math.round(ganho).toLocaleString('pt-BR');
+      document.getElementById('sim-share').textContent = (share * 100).toFixed(2).replace('.', ',') + '%';
     }
 
     // Init simulator
