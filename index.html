@@ -237,90 +237,116 @@
     }
     .btn-secondary:hover { color: var(--text); }
 
-    /* RIGHT COLUMN — MOSAIC */
+    /* RIGHT COLUMN — CREATOR CARDS */
     .hero-right {
       position: relative;
       min-height: 100vh;
+      display: flex;
+      align-items: stretch;
     }
 
-    /* Gradient dissolves mosaic into copy */
+    /* Left bleed gradient */
     .hero-right::before {
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(
-        to right,
-        rgba(0,0,0,0.75) 0%,
-        rgba(0,0,0,0.2) 25%,
-        transparent 55%
-      );
-      z-index: 2;
-      pointer-events: none;
-    }
-
-    /* Bottom fade */
-    .hero-right::after {
-      content: '';
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      height: 120px;
-      background: linear-gradient(to top, #000 0%, transparent 100%);
+      background: linear-gradient(to right, rgba(0,0,0,0.7) 0%, transparent 20%);
       z-index: 2;
       pointer-events: none;
     }
 
     .mosaic {
+      display: flex;
+      width: 100%;
+      gap: 8px;
+      padding: 80px 16px 16px 0;
+      align-items: stretch;
+    }
+
+    /* Each creator card */
+    .mosaic-item {
+      flex: 1;
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      cursor: pointer;
+      background: #111;
+      transition: transform 0.3s ease;
+    }
+    .mosaic-item:hover { transform: scale(1.02); }
+
+    /* Background photo */
+    .mosaic-bg {
       position: absolute;
       inset: 0;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 4px;
+      background-size: cover;
+      background-position: center top;
+      transition: transform 0.5s ease;
+    }
+    .mosaic-item:hover .mosaic-bg { transform: scale(1.06); }
+
+    /* Dark gradient overlay — bottom heavy */
+    .mosaic-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.45) 45%, transparent 100%);
     }
 
-    .mosaic-item {
-      position: relative;
-      overflow: hidden;
-      background: var(--surface);
+    /* Badge "New" */
+    .mosaic-badge {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      z-index: 3;
+      background: rgba(20,20,20,0.95);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 999px;
     }
 
-    .mosaic-item img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      transition: transform 0.6s ease;
-    }
-    .mosaic-item:hover img { transform: scale(1.05); }
-
-    .mosaic-overlay {
+    /* Bottom content area */
+    .mosaic-content {
       position: absolute;
       bottom: 0; left: 0; right: 0;
-      padding: 24px 16px 16px;
-      background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 100%);
+      padding: 0 16px 20px;
       z-index: 3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
     }
 
-    .mosaic-name {
-      font-size: 13px;
-      font-weight: 700;
-      color: #fff;
-      display: block;
-      letter-spacing: -0.2px;
+    /* Featured PNG logo/name */
+    .mosaic-featured-img {
+      height: 56px;
+      width: auto;
+      object-fit: contain;
+      margin-bottom: 12px;
+      filter: drop-shadow(0 2px 8px rgba(0,0,0,0.8));
     }
 
-    .mosaic-tag {
-      font-size: 11px;
-      color: rgba(255,255,255,0.55);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
+    /* Separator */
+    .mosaic-sep {
+      width: 40px;
+      height: 2px;
+      background: rgba(255,255,255,0.35);
+      margin: 0 auto 12px;
+      border-radius: 1px;
     }
 
-    /* Rich gradient placeholders */
-    .mosaic-item.p1 { background: linear-gradient(160deg, #1c0a12 0%, #3d1020 50%, #5a1530 100%); }
-    .mosaic-item.p2 { background: linear-gradient(160deg, #0a0c1c 0%, #151830 50%, #1e2245 100%); }
-    .mosaic-item.p3 { background: linear-gradient(160deg, #0c150a 0%, #152010 50%, #1a2e14 100%); }
-    .mosaic-item.p4 { background: linear-gradient(160deg, #1a0e00 0%, #2d1800 50%, #3d2200 100%); }
-    .mosaic-item.p5 { background: linear-gradient(160deg, #100018 0%, #200030 50%, #2c0042 100%); }
+    .mosaic-desc {
+      font-size: 12px;
+      color: rgba(255,255,255,0.85);
+      font-weight: 600;
+      line-height: 1.4;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
 
     /* FADE-UP ANIMATION */
     @keyframes fade-up {
@@ -852,25 +878,34 @@
       <!-- RIGHT COLUMN — PHOTO MOSAIC -->
       <div class="hero-right">
         <div class="mosaic">
-          <div class="mosaic-item p1">
-            <img src="https://vhmurjknxaacjmvfkjbw.supabase.co/storage/v1/object/public/avatars/b3d8d49d-c9eb-4088-ad67-db7c665752d6/avatar.jpg" alt="Cindy Ribas" onerror="this.style.display='none'" />
-            <div class="mosaic-overlay">
-              <span class="mosaic-name">Cindy Ribas</span>
-              <span class="mosaic-tag">Poder Pessoal e Espiritual</span>
+          <!-- Cindy Ribas -->
+          <div class="mosaic-item">
+            <div class="mosaic-bg" style="background-image: url('https://vhmurjknxaacjmvfkjbw.supabase.co/storage/v1/object/public/featured-creators/background-1766966339259.jpg')"></div>
+            <span class="mosaic-badge">New</span>
+            <div class="mosaic-content">
+              <img class="mosaic-featured-img" src="https://vhmurjknxaacjmvfkjbw.supabase.co/storage/v1/object/public/featured-creators/featured-1769424252427.png" alt="Cindy Ribas" />
+              <div class="mosaic-sep"></div>
+              <p class="mosaic-desc">Encontre a Luz do seu Poder Pessoal</p>
             </div>
           </div>
-          <div class="mosaic-item p2">
-            <img src="https://vhmurjknxaacjmvfkjbw.supabase.co/storage/v1/object/public/avatars/fc084ec7-18c4-4633-ab24-e84ae584f9ea/avatar.jpg" alt="Fabio Augusto" onerror="this.style.display='none'" />
-            <div class="mosaic-overlay">
-              <span class="mosaic-name">Fabio Augusto</span>
-              <span class="mosaic-tag">The Big Business</span>
+          <!-- Fabio Augusto -->
+          <div class="mosaic-item">
+            <div class="mosaic-bg" style="background-image: url('https://vhmurjknxaacjmvfkjbw.supabase.co/storage/v1/object/public/featured-creators/background-1767274253485.jpg')"></div>
+            <span class="mosaic-badge">New</span>
+            <div class="mosaic-content">
+              <img class="mosaic-featured-img" src="https://vhmurjknxaacjmvfkjbw.supabase.co/storage/v1/object/public/featured-creators/featured-1767635682569.png" alt="Fabio Augusto" />
+              <div class="mosaic-sep"></div>
+              <p class="mosaic-desc">Construa sua Mentalidade Digital</p>
             </div>
           </div>
-          <div class="mosaic-item p3">
-            <img src="https://vhmurjknxaacjmvfkjbw.supabase.co/storage/v1/object/public/avatars/e7d3af8e-5d8d-423f-b1d2-e7205d77630e/avatar.png" alt="Sol Mayumi" onerror="this.style.display='none'" />
-            <div class="mosaic-overlay">
-              <span class="mosaic-name">Sol Mayumi</span>
-              <span class="mosaic-tag">Terapia & Mastercoach</span>
+          <!-- Sol Mayumi -->
+          <div class="mosaic-item">
+            <div class="mosaic-bg" style="background-image: url('https://vhmurjknxaacjmvfkjbw.supabase.co/storage/v1/object/public/featured-creators/background-1767627236172.jpg')"></div>
+            <span class="mosaic-badge">New</span>
+            <div class="mosaic-content">
+              <img class="mosaic-featured-img" src="https://vhmurjknxaacjmvfkjbw.supabase.co/storage/v1/object/public/featured-creators/featured-1767632587289.png" alt="Sol Mayumi" />
+              <div class="mosaic-sep"></div>
+              <p class="mosaic-desc">Suas emoções determinam sua realidade</p>
             </div>
           </div>
         </div>
