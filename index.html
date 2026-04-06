@@ -1369,21 +1369,19 @@
       const overlay = document.getElementById('theme-overlay');
       const isLight = tab === 'consumer';
 
-      // Overlay color = target theme bg (hides the swap)
+      // 1. Cover instantly (no fade-in transition)
+      overlay.style.transition = 'none';
       overlay.style.background = isLight ? '#f8f8f8' : '#000000';
       overlay.style.opacity = '1';
 
-      setTimeout(() => {
-        // Apply theme
+      // 2. Apply all changes while fully covered
+      requestAnimationFrame(() => {
         document.body.classList.toggle('theme-light', isLight);
         document.body.classList.toggle('theme-dark', !isLight);
 
-        // Update tab buttons
         document.querySelectorAll('.tab-btn').forEach(btn => {
           btn.classList.toggle('active', btn.dataset.tab === tab);
         });
-
-        // Swap content
         document.querySelectorAll('.creator-content').forEach(el => {
           el.classList.toggle('visible', tab === 'creator');
         });
@@ -1399,9 +1397,12 @@
           ? 'Quero ser Creator Fundador'
           : 'Quero aprender e ser recompensado';
 
-        // Fade overlay out
-        overlay.style.opacity = '0';
-      }, 220);
+        // 3. Fade out to reveal new theme
+        requestAnimationFrame(() => {
+          overlay.style.transition = 'opacity 0.35s ease';
+          overlay.style.opacity = '0';
+        });
+      });
     }
 
     /* ========================
