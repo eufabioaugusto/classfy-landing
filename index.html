@@ -958,6 +958,239 @@
     .success-sub { color: var(--text-soft); font-size: 16px; line-height: 1.6; }
 
     /* ========================
+       MULTI-STEP OVERLAY
+    ======================== */
+    .step-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      transform: translateX(100%);
+      transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+      pointer-events: none;
+    }
+    .step-overlay.active {
+      transform: translateX(0);
+      pointer-events: all;
+    }
+
+    .step-left {
+      background: #000;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 72px 64px;
+      position: relative;
+      overflow: hidden;
+    }
+    .step-left::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 50% at 20% 70%, rgba(224,28,75,0.22) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .step-logo-text {
+      font-size: 20px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -0.5px;
+      margin-bottom: 80px;
+      position: relative;
+      z-index: 1;
+    }
+    .step-big-quote {
+      font-size: clamp(44px, 5vw, 72px);
+      font-weight: 900;
+      letter-spacing: -3px;
+      line-height: 0.95;
+      color: #fff;
+      margin-bottom: 28px;
+      position: relative;
+      z-index: 1;
+    }
+    .step-big-quote .accent { color: #e01c4b; }
+    .step-quote-caption {
+      font-size: 16px;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.7;
+      max-width: 360px;
+      position: relative;
+      z-index: 1;
+    }
+    .step-dots {
+      position: absolute;
+      bottom: 56px;
+      left: 64px;
+      display: flex;
+      gap: 8px;
+      z-index: 1;
+    }
+    .step-dot {
+      height: 6px;
+      width: 6px;
+      border-radius: 3px;
+      background: rgba(255,255,255,0.18);
+      transition: all 0.35s ease;
+    }
+    .step-dot.active {
+      background: #e01c4b;
+      width: 20px;
+    }
+
+    .step-right {
+      background: #0a0a0a;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 64px 72px;
+      overflow-y: auto;
+    }
+    .step-panel { display: none; flex-direction: column; }
+    .step-panel.visible { display: flex; }
+
+    .step-back {
+      background: none;
+      border: none;
+      color: rgba(255,255,255,0.35);
+      font-size: 14px;
+      cursor: pointer;
+      padding: 0;
+      margin-bottom: 44px;
+      font-family: inherit;
+      transition: color 0.2s;
+      text-align: left;
+      width: fit-content;
+    }
+    .step-back:hover { color: rgba(255,255,255,0.75); }
+    .step-eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #e01c4b;
+      margin-bottom: 14px;
+    }
+    .step-heading {
+      font-size: clamp(22px, 2.4vw, 32px);
+      font-weight: 800;
+      letter-spacing: -0.8px;
+      color: #fff;
+      line-height: 1.15;
+      margin-bottom: 8px;
+    }
+    .step-desc {
+      font-size: 15px;
+      color: rgba(255,255,255,0.45);
+      line-height: 1.65;
+      margin-bottom: 32px;
+    }
+
+    /* Form fields inside dark overlay */
+    .step-right .form-group { margin-bottom: 16px; }
+    .step-right .form-group label { color: rgba(255,255,255,0.45); }
+    .step-right .form-group input,
+    .step-right .form-group select,
+    .step-right .form-group textarea {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: #fff;
+    }
+    .step-right .form-group input::placeholder,
+    .step-right .form-group textarea::placeholder { color: rgba(255,255,255,0.2); }
+    .step-right .form-group input:focus,
+    .step-right .form-group select:focus,
+    .step-right .form-group textarea:focus { border-color: rgba(224,28,75,0.55); }
+    .step-right .form-group select option { background: #1a1a1a; color: #fff; }
+
+    .form-group textarea {
+      width: 100%;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      font-size: 15px;
+      color: var(--text);
+      font-family: inherit;
+      resize: vertical;
+      min-height: 88px;
+      outline: none;
+      transition: border-color 0.2s, background 0.3s, color 0.3s;
+      appearance: none;
+    }
+    .form-group textarea::placeholder { color: var(--muted); }
+    .form-group textarea:focus { border-color: rgba(224,28,75,0.6); }
+
+    /* Commitment items */
+    .commitment-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 24px; }
+    .commitment-item {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      padding: 16px 18px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 12px;
+    }
+    .commitment-check {
+      width: 22px; height: 22px;
+      background: rgba(224,28,75,0.12);
+      border: 1px solid rgba(224,28,75,0.35);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 700; color: #e01c4b;
+      flex-shrink: 0; margin-top: 1px;
+    }
+    .commitment-item strong { display: block; font-size: 14px; font-weight: 600; color: #fff; margin-bottom: 3px; }
+    .commitment-item p { font-size: 13px; color: rgba(255,255,255,0.4); line-height: 1.5; margin: 0; }
+
+    .returns-block {
+      background: rgba(224,28,75,0.06);
+      border: 1px solid rgba(224,28,75,0.18);
+      border-radius: 12px;
+      padding: 18px 22px;
+      margin-bottom: 24px;
+    }
+    .returns-label { font-size: 11px; font-weight: 700; color: #e01c4b; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
+    .returns-block ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 7px; }
+    .returns-block ul li {
+      font-size: 14px; color: rgba(255,255,255,0.65);
+      padding-left: 18px; position: relative; line-height: 1.5;
+    }
+    .returns-block ul li::before { content: '→'; position: absolute; left: 0; color: #e01c4b; font-size: 12px; }
+
+    .commitment-checkbox {
+      display: flex; align-items: flex-start; gap: 12px;
+      padding: 14px 16px;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 10px;
+      cursor: pointer;
+      margin-bottom: 20px;
+      transition: border-color 0.2s;
+    }
+    .commitment-checkbox:hover { border-color: rgba(224,28,75,0.35); }
+    .commitment-checkbox input[type="checkbox"] {
+      width: 17px; height: 17px;
+      accent-color: #e01c4b;
+      cursor: pointer; flex-shrink: 0; margin-top: 2px;
+    }
+    .commitment-checkbox label { font-size: 14px; color: rgba(255,255,255,0.6); cursor: pointer; line-height: 1.45; }
+
+    /* Step success */
+    .step-success-inner { text-align: center; margin: auto; }
+    .step-success-icon { font-size: 52px; margin-bottom: 20px; }
+    .step-success-title { font-size: 30px; font-weight: 900; letter-spacing: -1.2px; color: #fff; margin-bottom: 12px; }
+    .step-success-sub { font-size: 16px; color: rgba(255,255,255,0.5); line-height: 1.7; max-width: 380px; margin: 0 auto; }
+
+    /* Mobile */
+    @media (max-width: 768px) {
+      .step-overlay { grid-template-columns: 1fr; }
+      .step-left { display: none; }
+      .step-right { padding: 40px 28px; justify-content: flex-start; padding-top: 56px; }
+    }
+
+    /* ========================
        FOOTER
     ======================== */
     footer {
@@ -1316,7 +1549,7 @@
 
         <p class="form-count"><strong>Seja um dos primeiros</strong> a garantir sua vaga.</p>
 
-        <form id="waitlist-form" onsubmit="handleSubmit(event)">
+        <form id="waitlist-form" onsubmit="handleStep1(event)">
           <input type="hidden" id="form-type" value="creator" />
 
           <div class="form-row">
@@ -1380,6 +1613,116 @@
         <div class="success-icon">✓</div>
         <h3 class="success-title">Você está na lista.</h3>
         <p class="success-sub" id="success-text">Entraremos em contato assim que as vagas de creator fundador abrirem. Fique de olho no e-mail.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- MULTI-STEP OVERLAY -->
+  <div id="step-overlay" class="step-overlay">
+
+    <!-- LEFT PANEL -->
+    <div class="step-left">
+      <span class="step-logo-text">Classfy</span>
+      <h2 class="step-big-quote">Saber<br/>muda<br/><span class="accent">tudo.</span></h2>
+      <p class="step-quote-caption">Quem entra agora constrói a plataforma com a gente. Essas condições não voltam depois do lançamento.</p>
+      <div class="step-dots">
+        <div class="step-dot active" id="dot-1"></div>
+        <div class="step-dot" id="dot-2"></div>
+        <div class="step-dot" id="dot-3"></div>
+      </div>
+    </div>
+
+    <!-- RIGHT PANEL -->
+    <div class="step-right">
+
+      <!-- ETAPA 2 -->
+      <div id="step2-panel" class="step-panel visible">
+        <button class="step-back" onclick="closeOverlay()">← Voltar</button>
+        <p class="step-eyebrow">Etapa 2 de 3</p>
+        <h2 class="step-heading">Conta um pouco mais sobre você.</h2>
+        <p class="step-desc">Queremos entender quem você é e o que quer ensinar antes de confirmar sua vaga.</p>
+
+        <div class="form-group">
+          <label>O que você ensina? *</label>
+          <textarea id="what_you_teach" placeholder="Descreva seu conteúdo e metodologia..."></textarea>
+        </div>
+        <div class="form-group">
+          <label>Link de um conteúdo seu (opcional)</label>
+          <input type="url" id="existing_content" placeholder="youtube.com/watch?v=..." />
+        </div>
+        <div class="form-group">
+          <label>Horas por semana que pode dedicar? *</label>
+          <select id="hours_per_week">
+            <option value="">Selecione</option>
+            <option>2 a 4 horas</option>
+            <option>4 a 8 horas</option>
+            <option>Mais de 8 horas</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Por que quer entrar agora, no início? *</label>
+          <textarea id="why_now" placeholder="Nos conte o que te motivou a querer ser um Embaixador Fundador..."></textarea>
+        </div>
+
+        <button class="submit-btn" style="margin-top:8px" onclick="goToStep3()">Próximo →</button>
+      </div>
+
+      <!-- ETAPA 3 -->
+      <div id="step3-panel" class="step-panel">
+        <button class="step-back" onclick="showStep(2)">← Voltar</button>
+        <p class="step-eyebrow">Etapa 3 de 3</p>
+        <h2 class="step-heading">Seu compromisso como<br/>Embaixador Fundador.</h2>
+        <p class="step-desc">Esses são os requisitos mínimos para participar do pool de distribuição desde o primeiro mês.</p>
+
+        <div class="commitment-list">
+          <div class="commitment-item">
+            <div class="commitment-check">✓</div>
+            <div>
+              <strong>4 conteúdos nos primeiros 30 dias</strong>
+              <p>1 por semana — o mínimo para ganhar visibilidade e participar do pool.</p>
+            </div>
+          </div>
+          <div class="commitment-item">
+            <div class="commitment-check">✓</div>
+            <div>
+              <strong>Mínimo de 1 conteúdo por mês pelos primeiros 3 meses</strong>
+              <p>Criadores inativos por 30 dias saem do pool — mas mantêm o conteúdo na plataforma.</p>
+            </div>
+          </div>
+          <div class="commitment-item">
+            <div class="commitment-check">✓</div>
+            <div>
+              <strong>Participar do grupo de Embaixadores</strong>
+              <p>Feedback ativo e voz nas decisões da plataforma durante os primeiros 6 meses.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="returns-block">
+          <p class="returns-label">Em troca, a Classfy garante</p>
+          <ul>
+            <li>40% da receita total distribuídos por fórmula pública todo mês</li>
+            <li>Condições exclusivas de Embaixador Fundador — não disponíveis depois</li>
+            <li>Voz ativa nas decisões dos primeiros 6 meses</li>
+          </ul>
+        </div>
+
+        <div class="commitment-checkbox">
+          <input type="checkbox" id="accept-terms" />
+          <label for="accept-terms">Li e aceito os compromissos acima. Entendo que eles são o requisito mínimo para participar do pool de distribuição.</label>
+        </div>
+
+        <button class="submit-btn" id="final-submit-btn" onclick="submitApplication()">Confirmar candidatura →</button>
+      </div>
+
+      <!-- SUCESSO -->
+      <div id="step-success-panel" class="step-panel">
+        <div class="step-success-inner">
+          <div class="step-success-icon">✓</div>
+          <h3 class="step-success-title">Candidatura enviada.</h3>
+          <p class="step-success-sub">Você está na lista de Embaixadores Fundadores. Entraremos em contato com os próximos passos. Fique de olho no e-mail.</p>
+        </div>
       </div>
 
     </div>
@@ -1526,19 +1869,75 @@
     updateSim();
 
     /* ========================
-       FORM SUBMIT
+       MULTI-STEP FORM
     ======================== */
-    async function handleSubmit(e) {
+    function handleStep1(e) {
       e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
 
-      const btn = document.getElementById('submit-btn');
+      if (!name || !email) {
+        alert('Preencha nome e e-mail para continuar.');
+        return;
+      }
+
+      if (currentTab === 'creator') {
+        const niche = document.getElementById('niche')?.value;
+        if (!niche) { alert('Selecione seu nicho para continuar.'); return; }
+        showStep(2);
+      } else {
+        // Consumer: submete direto
+        doSubmit();
+      }
+    }
+
+    function showStep(step) {
+      const overlay = document.getElementById('step-overlay');
+      overlay.classList.add('active');
+
+      document.getElementById('step2-panel').classList.toggle('visible', step === 2);
+      document.getElementById('step3-panel').classList.toggle('visible', step === 3);
+      document.getElementById('step-success-panel').classList.remove('visible');
+
+      // Dots: 1 sempre ativo (já preenchido), 2 e 3 conforme etapa
+      document.getElementById('dot-1').classList.add('active');
+      document.getElementById('dot-2').classList.toggle('active', step >= 2);
+      document.getElementById('dot-3').classList.toggle('active', step >= 3);
+
+      // Scroll to top do painel
+      document.querySelector('.step-right').scrollTop = 0;
+    }
+
+    function closeOverlay() {
+      document.getElementById('step-overlay').classList.remove('active');
+    }
+
+    function goToStep3() {
+      const whatYouTeach = document.getElementById('what_you_teach').value.trim();
+      const hoursPerWeek = document.getElementById('hours_per_week').value;
+      const whyNow = document.getElementById('why_now').value.trim();
+
+      if (!whatYouTeach) { alert('Conte o que você ensina para continuar.'); return; }
+      if (!hoursPerWeek) { alert('Selecione quantas horas por semana pode dedicar.'); return; }
+      if (!whyNow) { alert('Nos conte por que quer entrar agora.'); return; }
+
+      showStep(3);
+    }
+
+    async function submitApplication() {
+      if (!document.getElementById('accept-terms').checked) {
+        alert('Você precisa aceitar os compromissos para confirmar sua candidatura.');
+        return;
+      }
+
+      const btn = document.getElementById('final-submit-btn');
       btn.disabled = true;
       btn.textContent = 'Enviando...';
 
       const payload = {
         name: document.getElementById('name').value,
         email: document.getElementById('email').value,
-        type: document.getElementById('form-type').value,
+        type: 'creator',
         niche: document.getElementById('niche')?.value || null,
         social_url: document.getElementById('social_url')?.value || null,
         followers_range: document.getElementById('followers_range')?.value || null,
@@ -1558,14 +1957,51 @@
 
         if (!res.ok) throw new Error('Erro ao salvar');
 
+        document.getElementById('step2-panel').classList.remove('visible');
+        document.getElementById('step3-panel').classList.remove('visible');
+        document.getElementById('step-success-panel').classList.add('visible');
+        document.getElementById('dot-3').classList.add('active');
+
+      } catch (err) {
+        btn.disabled = false;
+        btn.textContent = 'Confirmar candidatura →';
+        alert('Algo deu errado. Tente novamente em instantes.');
+      }
+    }
+
+    async function doSubmit() {
+      const btn = document.getElementById('submit-btn');
+      btn.disabled = true;
+      btn.textContent = 'Enviando...';
+
+      const payload = {
+        name: document.getElementById('name').value,
+        email: document.getElementById('email').value,
+        type: 'consumer',
+        niche: null,
+        social_url: null,
+        followers_range: null,
+      };
+
+      try {
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/waitlist`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'apikey': SUPABASE_ANON_KEY,
+            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+            'Prefer': 'return=minimal',
+          },
+          body: JSON.stringify(payload),
+        });
+
+        if (!res.ok) throw new Error('Erro ao salvar');
+
         document.getElementById('form-container').style.display = 'none';
         const successEl = document.getElementById('success-msg');
         successEl.classList.add('visible');
-
-        if (currentTab === 'consumer') {
-          document.getElementById('success-text').textContent =
-            'Você será notificado quando a plataforma abrir. Alunos fundadores têm vantagens exclusivas — fique de olho no e-mail.';
-        }
+        document.getElementById('success-text').textContent =
+          'Você será notificado quando a plataforma abrir. Alunos fundadores têm vantagens exclusivas — fique de olho no e-mail.';
 
       } catch (err) {
         btn.disabled = false;
