@@ -1188,8 +1188,8 @@
       font-size: 11px; font-weight: 700; color: #e01c4b;
       flex-shrink: 0; margin-top: 1px;
     }
-    .commitment-item strong { display: block; font-size: 14px; font-weight: 600; color: #fff; margin-bottom: 3px; }
-    .commitment-item p { font-size: 13px; color: rgba(255,255,255,0.4); line-height: 1.5; margin: 0; }
+    .commitment-item strong { display: block; font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 4px; letter-spacing: -0.3px; }
+    .commitment-item p { font-size: 13px; color: rgba(255,255,255,0.38); line-height: 1.5; margin: 0; }
 
     .returns-block {
       background: rgba(224,28,75,0.06);
@@ -1205,6 +1205,8 @@
       padding-left: 18px; position: relative; line-height: 1.5;
     }
     .returns-block ul li::before { content: '→'; position: absolute; left: 0; color: #e01c4b; font-size: 12px; }
+    .returns-block ul li.icon-li { padding-left: 0; display: flex; align-items: center; gap: 8px; }
+    .returns-block ul li.icon-li::before { display: none; }
 
     .commitment-checkbox {
       display: flex; align-items: flex-start; gap: 12px;
@@ -1818,15 +1820,14 @@
           <p class="returns-label">Em troca, a Classfy garante</p>
           <ul>
             <li>40% da receita total distribuídos por fórmula pública todo mês</li>
-            <li style="display:flex;align-items:center;gap:8px;padding-left:0;">
+            <li class="icon-li">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" style="flex-shrink:0"><circle cx="12" cy="12" r="10" fill="#3b82f6"/><path d="M9 12l2 2 4-4" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
               Selo verificado na plataforma — visível para todos os alunos
             </li>
-            <li style="display:flex;align-items:center;gap:8px;padding-left:0;">
+            <li class="icon-li">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path d="m2 4 3 12h14l3-12-6 5-4-8-4 8-6-5zm3 16h14"/></svg>
               Plano Pro incluso + condições que não voltam depois do lançamento
             </li>
-            <li>Voz ativa nas decisões dos primeiros 6 meses</li>
           </ul>
         </div>
 
