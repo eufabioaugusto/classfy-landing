@@ -38,6 +38,37 @@
       --tab-bg: rgba(255,255,255,0.06);
     }
 
+    .bg-cards {
+    position: relative;
+    z-index: 1;
+}
+
+.bg-cards::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    background-image: url('./bg-hero1.png')!important;
+    background-repeat: repeat-x;
+    background-size: auto 100%!important;
+    
+    animation: scrollBg 30s linear infinite;
+    
+    opacity: 0.2!important;
+    z-index: -1;
+}
+
+@keyframes scrollBg {
+    from {
+        background-position: 0 0;
+    }
+    to {
+        background-position: -1000px 0;
+    }
+}
+
+
+
     /* LIGHT THEME (Quero Aprender) */
     body.theme-light {
       --bg: #f8f8f8;
@@ -1517,7 +1548,7 @@
   </nav>
 
   <!-- HERO -->
-  <div class="hero-wrapper">
+  <div class="hero-wrapper bg-cards">
 
     <!-- TAB TOGGLE — centered at top -->
     <div class="hero-tab-container">
