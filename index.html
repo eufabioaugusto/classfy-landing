@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Classfy — Saber muda tudo.</title>
-  <meta name="description" content="A plataforma onde o conhecimento que transforma vidas encontra quem ensina de verdade. Para creators. Para quem quer aprender." />
-  <meta property="og:title" content="Classfy — Saber muda tudo." />
-  <meta property="og:description" content="A plataforma onde o conhecimento que transforma vidas encontra quem ensina de verdade. Para creators. Para quem quer aprender." />
+  <title>Classfy — Aprendizado, creators e IA em uma nova economia.</title>
+  <meta name="description" content="A plataforma para aprender com creators de verdade, estudar com IA e participar de uma economia transparente baseada em impacto, dedicação e conhecimento aplicado." />
+  <meta property="og:title" content="Classfy — Aprendizado, creators e IA em uma nova economia." />
+  <meta property="og:description" content="Aprenda melhor, publique com estrutura e participe de uma plataforma que recompensa impacto real com critérios públicos." />
   <meta property="og:image" content="https://classfy.com.br/og.jpg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -27,10 +27,12 @@
       --text-soft: #a3a3a3;
       --red: #e01c4b;
       --red-hover: #c41540;
+      --gold: #d7a64a;
+      --blue: #4f8cff;
       --radius: 8px;
       --nav-bg: rgba(0,0,0,0.9);
-      --hero-bg-1: rgba(224,28,75,0.12);
-      --hero-bg-2: rgba(224,28,75,0.05);
+      --hero-bg-1: rgba(224,28,75,0.16);
+      --hero-bg-2: rgba(215,166,74,0.10);
       --badge-border: rgba(224,28,75,0.4);
       --badge-color: var(--red);
       --tab-bg: rgba(255,255,255,0.06);
@@ -46,8 +48,8 @@
       --text: #0a0a0a;
       --text-soft: #555555;
       --nav-bg: rgba(248,248,248,0.95);
-      --hero-bg-1: rgba(224,28,75,0.06);
-      --hero-bg-2: rgba(224,28,75,0.03);
+      --hero-bg-1: rgba(224,28,75,0.07);
+      --hero-bg-2: rgba(215,166,74,0.09);
       --badge-border: rgba(224,28,75,0.5);
       --tab-bg: rgba(0,0,0,0.06);
     }
@@ -55,7 +57,7 @@
     html { scroll-behavior: smooth; }
 
     body {
-      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      font-family: 'Manrope', system-ui, -apple-system, sans-serif;
       background: var(--bg);
       color: var(--text);
       line-height: 1.6;
@@ -119,10 +121,25 @@
       position: relative;
       overflow: hidden;
       background:
-        radial-gradient(ellipse 55% 70% at 75% 50%, var(--hero-bg-1) 0%, transparent 65%),
-        radial-gradient(ellipse 30% 40% at 15% 80%, var(--hero-bg-2) 0%, transparent 60%),
+        radial-gradient(ellipse 55% 70% at 78% 46%, var(--hero-bg-1) 0%, transparent 68%),
+        radial-gradient(ellipse 34% 46% at 16% 82%, var(--hero-bg-2) 0%, transparent 64%),
+        linear-gradient(135deg, rgba(255,255,255,0.04), transparent 28%),
         var(--bg);
       transition: background 0.4s ease;
+    }
+
+    .hero-wrapper::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+      background-size: 80px 80px;
+      -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 20%, #000 0%, transparent 78%);
+      mask-image: radial-gradient(ellipse 80% 70% at 50% 20%, #000 0%, transparent 78%);
+      pointer-events: none;
+      opacity: 0.5;
     }
 
     /* TAB TOGGLE — centered above hero content */
@@ -227,9 +244,10 @@
 
     .hero-headline {
       font-size: clamp(38px, 4.2vw, 68px);
-      font-weight: 900;
+      font-family: 'Space Grotesk', 'Manrope', sans-serif;
+      font-weight: 700;
       line-height: 1.0;
-      letter-spacing: -2.5px;
+      letter-spacing: -2.8px;
       margin-bottom: 24px;
       animation: fade-up 0.6s ease-out 0.3s both;
       color: var(--text);
@@ -287,7 +305,7 @@
       display: inline-block;
       transition: all 0.2s;
       letter-spacing: -0.2px;
-      font-family: inherit;
+      font-family: 'Manrope', system-ui, sans-serif;
     }
     .btn-primary:hover { background: var(--red-hover); transform: translateY(-1px); }
 
@@ -466,6 +484,7 @@
 
     .problem-title {
       font-size: clamp(26px, 3vw, 40px);
+      font-family: 'Space Grotesk', 'Manrope', sans-serif;
       font-weight: 800;
       letter-spacing: -1.5px;
       line-height: 1.1;
@@ -536,6 +555,7 @@
 
     .section-title {
       font-size: clamp(28px, 4vw, 48px);
+      font-family: 'Space Grotesk', 'Manrope', sans-serif;
       font-weight: 800;
       letter-spacing: -1.5px;
       line-height: 1.1;
@@ -589,7 +609,10 @@
       align-items: center;
       justify-content: center;
       margin-bottom: 20px;
-      font-size: 22px;
+      font-family: 'Space Grotesk', 'Manrope', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--red);
     }
 
     .step-title {
@@ -606,6 +629,132 @@
       color: var(--text-soft);
       line-height: 1.65;
       transition: color 0.3s;
+    }
+
+    /* ========================
+       TRUST + VALUE PROPS
+    ======================== */
+    .trust-strip {
+      max-width: 1100px;
+      margin: -42px auto 0;
+      padding: 0 24px 54px;
+      position: relative;
+      z-index: 5;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    .trust-item {
+      background: var(--surface);
+      background: color-mix(in srgb, var(--surface) 84%, transparent);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 18px 20px;
+      backdrop-filter: blur(16px);
+      box-shadow: 0 18px 60px rgba(0,0,0,0.16);
+    }
+
+    .trust-kicker {
+      display: block;
+      color: var(--red);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .trust-title {
+      color: var(--text);
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: -0.2px;
+      line-height: 1.35;
+    }
+
+    .value-section {
+      padding-top: 86px;
+      background:
+        radial-gradient(ellipse 42% 58% at 12% 20%, rgba(224,28,75,0.08), transparent 70%),
+        var(--bg);
+    }
+
+    .value-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+      margin-top: 52px;
+    }
+
+    .value-card {
+      min-height: 230px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 34px;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.2s, transform 0.2s, background 0.3s;
+    }
+
+    .value-card:hover {
+      border-color: rgba(224,28,75,0.45);
+      transform: translateY(-2px);
+    }
+
+    .value-card::after {
+      content: '';
+      position: absolute;
+      right: -70px;
+      top: -70px;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      background: rgba(224,28,75,0.10);
+      pointer-events: none;
+    }
+
+    .value-kicker {
+      color: var(--red);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1.6px;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    .value-title {
+      font-family: 'Space Grotesk', 'Manrope', sans-serif;
+      color: var(--text);
+      font-size: 26px;
+      font-weight: 700;
+      letter-spacing: -1px;
+      line-height: 1.08;
+      margin-bottom: 14px;
+      max-width: 360px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .value-desc {
+      color: var(--text-soft);
+      font-size: 15px;
+      line-height: 1.7;
+      max-width: 440px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .economy-note {
+      margin-top: 18px;
+      padding: 14px 16px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.55;
     }
 
     /* ========================
@@ -634,6 +783,7 @@
 
     .pool-title {
       font-size: clamp(28px, 3vw, 40px);
+      font-family: 'Space Grotesk', 'Manrope', sans-serif;
       font-weight: 900;
       letter-spacing: -1.5px;
       line-height: 1.1;
@@ -829,7 +979,10 @@
     .format-card:hover { border-color: var(--muted); }
 
     .format-icon {
-      font-size: 24px;
+      font-family: 'Space Grotesk', 'Manrope', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--red);
       flex-shrink: 0;
       width: 52px; height: 52px;
       background: var(--surface-2);
@@ -876,6 +1029,7 @@
 
     .form-title {
       font-size: clamp(30px, 4vw, 50px);
+      font-family: 'Space Grotesk', 'Manrope', sans-serif;
       font-weight: 900;
       letter-spacing: -2px;
       line-height: 1.05;
@@ -1301,6 +1455,8 @@
       .hero-left .hero-badge { margin-left: auto; margin-right: auto; }
       .hero-left .hero-cta-group { justify-content: center; }
       .hero-left .hero-sub { max-width: 100%; }
+      .trust-strip { grid-template-columns: repeat(2, 1fr); margin-top: 0; padding-bottom: 36px; }
+      .value-grid { grid-template-columns: 1fr; }
       .hero-right {
         min-height: auto;
         padding: 0 0 48px 0;
@@ -1332,8 +1488,11 @@
 
     @media (max-width: 768px) {
       nav { padding: 16px 20px; }
+      .nav-right { display: none; }
       .hero-tab-container { top: 68px; }
       .pool-section { grid-template-columns: 1fr; padding: 36px 28px; gap: 36px; }
+      .trust-strip { grid-template-columns: 1fr; }
+      .value-card { min-height: auto; padding: 28px; }
       .formats-grid { grid-template-columns: 1fr; }
       .form-row { grid-template-columns: 1fr; }
       section { padding: 72px 20px; }
@@ -1350,7 +1509,11 @@
   <!-- NAV -->
   <nav>
     <a href="/" class="nav-logo">Classfy</a>
-    <div class="nav-right"></div>
+    <div class="nav-right">
+      <a href="#como-funciona" class="btn-ghost" onclick="navigateTab(event, 'creator', '#como-funciona')">Creators</a>
+      <a href="#para-alunos" class="btn-ghost" onclick="navigateTab(event, 'consumer', '#para-alunos')">Alunos</a>
+      <a href="#form" class="btn-ghost">Lista de espera</a>
+    </div>
   </nav>
 
   <!-- HERO -->
@@ -1359,8 +1522,8 @@
     <!-- TAB TOGGLE — centered at top -->
     <div class="hero-tab-container">
       <div class="tab-toggle">
-        <button class="tab-btn active" data-tab="creator" onclick="switchTab('creator')">Sou Creator</button>
-        <button class="tab-btn" data-tab="consumer" onclick="switchTab('consumer')">Quero Aprender</button>
+        <button class="tab-btn active" data-tab="creator" onclick="switchTab('creator')">Para creators</button>
+        <button class="tab-btn" data-tab="consumer" onclick="switchTab('consumer')">Para alunos</button>
       </div>
     </div>
 
@@ -1374,18 +1537,18 @@
         <div class="fade-content" id="hero-content">
           <!-- CREATOR -->
           <div class="creator-content visible" id="creator-hero">
-            <h1 class="hero-headline">Você ensina.<br/>Você transforma.<br/>Você recebe pelo que <span class="accent">gera</span>.</h1>
-            <p class="hero-sub">Na Classfy, 40% da receita total vai para criadores todo mês, por fórmula pública. Você calcula sua participação antes de receber. Sem algoritmo opaco. Sem corte surpresa.</p>
+            <h1 class="hero-headline">Transforme conhecimento<br/>em autoridade,<br/>comunidade e <span class="accent">receita</span>.</h1>
+            <p class="hero-sub">A Classfy reúne publicação, aprendizado com IA, comunidade e distribuição transparente em uma única plataforma. Publique aulas, cursos, shorts, podcasts e lives — e participe de um modelo mensal baseado em impacto real.</p>
           </div>
           <!-- CONSUMER -->
           <div class="consumer-content" id="consumer-hero">
-            <h1 class="hero-headline">Saber muda tudo.<br/>Aprenda com quem<br/>já chegou <span class="accent">lá</span>.</h1>
-            <p class="hero-sub">Conteúdo de criadores que ensinam com método e clareza — de finanças a tecnologia, de marketing a desenvolvimento pessoal. O conhecimento certo, no momento certo.</p>
+            <h1 class="hero-headline">Aprenda melhor.<br/>Estude com IA.<br/>E evolua com quem <span class="accent">vive o que ensina</span>.</h1>
+            <p class="hero-sub">Conteúdos práticos, creators selecionados e ferramentas para transformar cada aula em estudo: chat com IA, anotações, quizzes, playlists e recompensas por dedicação consistente.</p>
           </div>
         </div>
 
         <div class="hero-cta-group">
-          <a href="#form" class="btn-primary" id="hero-cta">Quero ser Embaixador Fundador</a>
+          <a href="#form" class="btn-primary" id="hero-cta">Candidatar como creator fundador</a>
           <a href="#como-funciona" class="btn-secondary" id="como-funciona-link">Como funciona →</a>
         </div>
       </div>
@@ -1423,6 +1586,25 @@
         </div>
       </div>
     </div>
+
+    <div class="trust-strip">
+      <div class="trust-item">
+        <span class="trust-kicker">Conteúdo</span>
+        <p class="trust-title">Cursos, aulas, shorts, podcasts e lives no mesmo ecossistema.</p>
+      </div>
+      <div class="trust-item">
+        <span class="trust-kicker">Estudo</span>
+        <p class="trust-title">IA para tirar dúvidas, resumir aulas e transformar consumo em prática.</p>
+      </div>
+      <div class="trust-item">
+        <span class="trust-kicker">Economia</span>
+        <p class="trust-title">Distribuição mensal com critérios públicos de impacto e dedicação.</p>
+      </div>
+      <div class="trust-item">
+        <span class="trust-kicker">Fundadores</span>
+        <p class="trust-title">Entrada antecipada para creators e alunos que querem construir junto.</p>
+      </div>
+    </div>
   </div>
 
   <!-- PROBLEM -->
@@ -1430,78 +1612,111 @@
     <div class="problem-inner">
       <div class="reveal">
         <p class="problem-label">Por que a Classfy existe</p>
-        <h2 class="problem-title">O conhecimento que muda vidas<br/>merece uma plataforma <span>à altura</span>.</h2>
-        <p class="problem-desc">Saímos do zero com determinação e o conhecimento certo acessado na hora certa — e isso mudou tudo. A Classfy nasceu para que esse tipo de aprendizado seja acessível a qualquer pessoa, e para que quem ensina receba de forma justa, transparente e proporcional ao impacto que gera.</p>
+        <h2 class="problem-title">Conhecimento bom não deveria ficar perdido<br/>em feeds, links soltos e <span>algoritmos opacos</span>.</h2>
+        <p class="problem-desc">A Classfy nasce para organizar a próxima geração de aprendizado digital: conteúdo com método, creators com estrutura, IA como apoio de estudo e uma economia onde impacto e dedicação contam de forma clara.</p>
       </div>
       <div class="problem-stats">
         <div class="problem-stat-item reveal reveal-delay-1">
           <div class="problem-stat-num counter" data-target="40" data-suffix="%">0%</div>
-          <div class="problem-stat-label">da receita total distribuída mensalmente — fórmula pública e imutável</div>
+          <div class="problem-stat-label">da receita total distribuída mensalmente por critérios públicos e auditáveis</div>
         </div>
         <div class="problem-stat-item reveal reveal-delay-2">
-          <div class="problem-stat-num">R$ 0</div>
-          <div class="problem-stat-label">de taxa para entrar como creator — sem mensalidade, sem custo de publicação</div>
+          <div class="problem-stat-num">IA</div>
+          <div class="problem-stat-label">para apoiar estudo, revisão, perguntas, resumos e evolução dentro da plataforma</div>
         </div>
         <div class="problem-stat-item reveal reveal-delay-3">
-          <div class="problem-stat-num counter" data-target="2" data-suffix="×">0×</div>
-          <div class="problem-stat-label">a Classfy é a única plataforma onde criadores e alunos ganham ao mesmo tempo</div>
+          <div class="problem-stat-num">1</div>
+          <div class="problem-stat-label">ambiente para publicar, aprender, medir performance e construir comunidade</div>
         </div>
       </div>
     </div>
   </div>
 
+  <!-- VALUE PROPS -->
+  <section class="value-section">
+    <div class="container">
+      <p class="section-label reveal">A plataforma</p>
+      <h2 class="section-title reveal">Não é só uma área de membros.<br/>É uma infraestrutura para ensinar, aprender e crescer.</h2>
+      <p class="section-sub reveal">A Classfy conecta creators, alunos, ferramentas de estudo e um sistema de distribuição transparente para transformar conhecimento em resultado mensurável.</p>
+
+      <div class="value-grid">
+        <div class="value-card reveal reveal-delay-1">
+          <p class="value-kicker">Para aprender</p>
+          <h3 class="value-title">Menos consumo passivo. Mais estudo guiado.</h3>
+          <p class="value-desc">Cada conteúdo pode virar resumo, pergunta, revisão e trilha de aprendizado com apoio de IA. O aluno aprende com mais clareza e acompanha sua evolução.</p>
+        </div>
+        <div class="value-card reveal reveal-delay-2">
+          <p class="value-kicker">Para ensinar</p>
+          <h3 class="value-title">Publique em vários formatos sem perder estrutura.</h3>
+          <p class="value-desc">Cursos, aulas, shorts, podcasts e lives convivem em um perfil profissional, com métricas de consumo, conclusão e engajamento real.</p>
+        </div>
+        <div class="value-card reveal reveal-delay-3">
+          <p class="value-kicker">Para crescer</p>
+          <h3 class="value-title">Performance baseada em impacto, não em achismo.</h3>
+          <p class="value-desc">Performance Points organizam sinais de qualidade como atenção, conclusão e interação. Creators entendem o que funciona e alunos são reconhecidos pela dedicação.</p>
+        </div>
+        <div class="value-card reveal reveal-delay-4">
+          <p class="value-kicker">Para participar</p>
+          <h3 class="value-title">Uma economia mais clara para quem cria e quem aprende.</h3>
+          <p class="value-desc">Parte da receita mensal volta para a comunidade de acordo com regras públicas. Não é promessa de renda: é um modelo proporcional, transparente e em construção.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- HOW IT WORKS — CREATOR -->
   <section id="como-funciona" class="creator-content visible">
     <div class="container">
       <p class="section-label reveal">Para Creators</p>
-      <h2 class="section-title reveal">Como o pool funciona<br/>para você</h2>
-      <p class="section-sub reveal">Sem CPM arbitrário. Sem algoritmo que te penaliza. Sua participação é proporcional ao seu impacto real.</p>
+      <h2 class="section-title reveal">Uma plataforma para transformar conteúdo em produto, comunidade e distribuição.</h2>
+      <p class="section-sub reveal">Você entra com conhecimento e consistência. A Classfy entrega estrutura de publicação, descoberta, métricas e um modelo de participação proporcional ao impacto gerado.</p>
 
       <div class="steps-grid">
         <div class="step-card reveal reveal-delay-1">
           <div class="step-number">Passo 01</div>
-          <div class="step-icon">📹</div>
-          <h3 class="step-title">Publique seu conteúdo</h3>
-          <p class="step-desc">Aulas, cursos completos, shorts, podcasts ou lives. Qualquer formato, qualquer nicho. Você cria, a plataforma distribui.</p>
+          <div class="step-icon">01</div>
+          <h3 class="step-title">Organize sua vitrine de conhecimento</h3>
+          <p class="step-desc">Publique aulas, cursos completos, shorts, podcasts e lives em um perfil profissional. O aluno encontra seu método, seus formatos e sua autoridade em um só lugar.</p>
         </div>
         <div class="step-card reveal reveal-delay-2">
           <div class="step-number">Passo 02</div>
-          <div class="step-icon">⚡</div>
-          <h3 class="step-title">Acumule Performance Points</h3>
-          <p class="step-desc">Visualizações, tempo de conclusão, engajamento real. Quanto melhor seu conteúdo, mais PP você acumula. Os critérios são fixos e públicos.</p>
+          <div class="step-icon">PP</div>
+          <h3 class="step-title">Meça impacto com Performance Points</h3>
+          <p class="step-desc">A plataforma considera sinais como atenção, conclusão e engajamento. Você entende quais conteúdos geram aprendizado real e melhora com dados.</p>
         </div>
         <div class="step-card reveal reveal-delay-3">
           <div class="step-number">Passo 03</div>
-          <div class="step-icon">💰</div>
-          <h3 class="step-title">Receba sua fatia do pool</h3>
-          <p class="step-desc">Todo mês, 40% da receita total é distribuído proporcionalmente entre todos os creators ativos. Você pode calcular sua participação antes de receber.</p>
+          <div class="step-icon">R$</div>
+          <h3 class="step-title">Participe da distribuição mensal</h3>
+          <p class="step-desc">Todo mês, 40% da receita total é distribuído proporcionalmente entre creators ativos e elegíveis. A regra é pública para você acompanhar sua participação.</p>
         </div>
       </div>
 
       <!-- POOL -->
       <div class="pool-section reveal">
         <div>
-          <h3 class="pool-title">O pool que<br/><span>não mente</span>.</h3>
-          <p class="pool-desc">A maioria das plataformas decide quanto você recebe nos bastidores. Aqui a conta é aberta. Sem ajuste discricionário. Sem corte surpresa. Se a Classfy cresce, você cresce junto — matematicamente.</p>
+          <h3 class="pool-title">Distribuição transparente,<br/><span>sem caixa-preta</span>.</h3>
+          <p class="pool-desc">A maioria das plataformas concentra receita e entrega pouca visibilidade para quem cria. Na Classfy, a participação mensal segue uma fórmula pública baseada em Performance Points e receita do período.</p>
           <div class="pool-formula">
-            Seu ganho = <code>(seus PP / total PP) × pool do mês</code>
+            Participação estimada = <code>(seus PP / total PP) × pool do mês</code>
           </div>
           <div class="pool-formula">
             Pool do mês = <code>receita total × 40%</code>
           </div>
+          <div class="economy-note">Valores dependem de receita, elegibilidade, critérios antifraude e performance relativa. A Classfy não promete renda fixa; o modelo é proporcional ao impacto medido na plataforma.</div>
         </div>
         <div>
           <div class="pool-stat">
             <div class="pool-stat-num counter" data-target="40" data-suffix="%">0%</div>
-            <div class="pool-stat-label">da receita total vai para<br/>creators e alunos todo mês</div>
+            <div class="pool-stat-label">da receita total compõe<br/>a distribuição mensal da comunidade</div>
           </div>
         </div>
       </div>
 
       <!-- SIMULADOR -->
       <div class="simulator reveal">
-        <div class="simulator-title">Simule seu potencial de ganho</div>
-        <div class="simulator-sub">Quanto mais você publica e engaja, maior sua fatia do pool.</div>
+        <div class="simulator-title">Simule uma participação estimada</div>
+        <div class="simulator-sub">Use o exemplo para entender a lógica do pool. O resultado real depende da receita e da performance relativa do mês.</div>
 
         <div class="sim-grid">
           <div class="sim-field">
@@ -1517,7 +1732,7 @@
         <div class="sim-result">
           <div class="sim-result-item">
             <div class="val" id="sim-ganho">R$ 400</div>
-            <div class="lbl">Estimativa de ganho mensal</div>
+            <div class="lbl">Participação mensal estimada</div>
           </div>
           <div class="sim-result-item">
             <div class="val" id="sim-share">1,67%</div>
@@ -1526,7 +1741,7 @@
         </div>
 
         <div class="sim-disclaimer">
-          Valores ilustrativos baseados na hipótese de 300.000 visualizações totais na plataforma por mês. O ganho real depende do engajamento, conclusões de aula e performance relativa entre todos os creators ativos.
+          Valores ilustrativos baseados na hipótese de 300.000 visualizações totais na plataforma por mês. A participação real depende de receita, elegibilidade, engajamento, conclusões de aula e performance relativa entre todos os creators ativos.
         </div>
       </div>
     </div>
@@ -1536,77 +1751,78 @@
   <section id="para-alunos" class="consumer-content">
     <div class="container">
       <p class="section-label reveal">Para Quem Quer Aprender</p>
-      <h2 class="section-title reveal">Aprenda com quem<br/>realmente sabe.<br/>E seja pago por isso.</h2>
-      <p class="section-sub reveal">Cada conteúdo consumido com atenção gera Performance Points. Esses pontos valem participação no pool mensal — reconhecimento real por dedicação real.</p>
+      <h2 class="section-title reveal">Aprendizado prático, guiado por IA e conectado a creators de verdade.</h2>
+      <p class="section-sub reveal">A Classfy foi pensada para quem quer sair do conteúdo solto e estudar com direção: assistir, perguntar, revisar, criar trilhas e acompanhar evolução.</p>
 
       <div class="steps-grid">
         <div class="step-card reveal reveal-delay-1">
           <div class="step-number">Passo 01</div>
-          <div class="step-icon">🎓</div>
-          <h3 class="step-title">Assine e acesse tudo</h3>
-          <p class="step-desc">Uma assinatura dá acesso a todos os formatos: cursos completos, aulas, shorts, podcasts e lives. De qualquer nicho, a qualquer hora.</p>
+          <div class="step-icon">01</div>
+          <h3 class="step-title">Escolha creators e trilhas relevantes</h3>
+          <p class="step-desc">Encontre conteúdos por tema, objetivo e formato. Cursos longos, aulas rápidas, shorts, podcasts e lives podem virar uma rotina real de aprendizado.</p>
         </div>
         <div class="step-card reveal reveal-delay-2">
           <div class="step-number">Passo 02</div>
-          <div class="step-icon">⚡</div>
-          <h3 class="step-title">Consuma e acumule PP</h3>
-          <p class="step-desc">Visualizações, conclusões de aula e engajamento real geram Performance Points. Quanto mais você aprende de verdade, mais pontos você acumula.</p>
+          <div class="step-icon">IA</div>
+          <h3 class="step-title">Estude com apoio inteligente</h3>
+          <p class="step-desc">Use IA para tirar dúvidas, resumir aulas, gerar perguntas e revisar pontos importantes. A plataforma ajuda a transformar conteúdo em retenção.</p>
         </div>
         <div class="step-card reveal reveal-delay-3">
           <div class="step-number">Passo 03</div>
-          <div class="step-icon">💰</div>
-          <h3 class="step-title">Receba sua recompensa</h3>
-          <p class="step-desc">Todo mês, parte do pool da Classfy é distribuída entre os alunos mais dedicados. Seus PP viram participação real — dinheiro de volta por aprender.</p>
+          <div class="step-icon">PP</div>
+          <h3 class="step-title">Ganhe reconhecimento por dedicação</h3>
+          <p class="step-desc">Conclusão, atenção e engajamento geram Performance Points. Em campanhas e regras elegíveis, alunos dedicados podem participar de recompensas da comunidade.</p>
         </div>
       </div>
 
       <div class="pool-section reveal">
         <div>
-          <h3 class="pool-title">Dedicação que<br/><span>tem retorno</span>.</h3>
-          <p class="pool-desc">Na maioria das plataformas você paga e só. Aqui, sua dedicação é medida e recompensada. Quanto mais você aprende com atenção, maior sua fatia do pool mensal de alunos.</p>
+          <h3 class="pool-title">Dedicação também<br/><span>entra na conta</span>.</h3>
+          <p class="pool-desc">A Classfy valoriza quem estuda com consistência. Além de organizar sua evolução, a plataforma mede dedicação por Performance Points e pode direcionar recompensas conforme regras públicas de elegibilidade.</p>
           <div class="pool-formula">
-            Sua recompensa = <code>(seus PP / total PP alunos) × pool do mês</code>
+            Recompensa elegível = <code>(seus PP / total PP alunos) × pool do mês</code>
           </div>
+          <div class="economy-note">Recompensas para alunos dependem de campanhas, receita, elegibilidade e validações antifraude. O benefício principal é aprender melhor; recompensas são uma camada adicional do modelo.</div>
         </div>
         <div>
           <div class="pool-stat">
             <div class="pool-stat-num counter" data-target="40" data-suffix="%">0%</div>
-            <div class="pool-stat-label">da receita total distribuído<br/>entre creators e alunos todo mês</div>
+            <div class="pool-stat-label">da receita total compõe<br/>a economia mensal da plataforma</div>
           </div>
         </div>
       </div>
 
       <p class="section-label reveal" style="margin-top: 64px;">O que você encontra aqui</p>
       <h2 class="section-title reveal" style="font-size: clamp(28px, 4vw, 48px); margin-bottom: 12px;">Todos os formatos.<br/>Um só lugar.</h2>
-      <p class="section-sub reveal" style="margin-bottom: 40px;">Aprenda do jeito que funciona pra você.</p>
+      <p class="section-sub reveal" style="margin-bottom: 40px;">Aprenda em profundidade quando tiver tempo. Revise rápido quando precisar. Continue de onde parou.</p>
 
       <div class="formats-grid">
         <div class="format-card reveal reveal-delay-1">
-          <div class="format-icon">⚡</div>
+          <div class="format-icon">S</div>
           <div>
             <h3 class="format-title">Shorts</h3>
-            <p class="format-desc">Conhecimento concentrado em até 3 minutos. Perfeito para aprender no intervalo ou no transporte.</p>
+            <p class="format-desc">Pílulas objetivas para descobrir temas, revisar conceitos e manter contato diário com o que importa.</p>
           </div>
         </div>
         <div class="format-card reveal reveal-delay-2">
-          <div class="format-icon">🎓</div>
+          <div class="format-icon">C</div>
           <div>
             <h3 class="format-title">Cursos</h3>
-            <p class="format-desc">Trilhas completas com módulos, aulas e certificado. Do iniciante ao avançado, em qualquer nicho.</p>
+            <p class="format-desc">Trilhas completas com módulos, aulas e progressão clara para sair do ponto A e chegar no próximo nível.</p>
           </div>
         </div>
         <div class="format-card reveal reveal-delay-1">
-          <div class="format-icon">🎙️</div>
+          <div class="format-icon">P</div>
           <div>
             <h3 class="format-title">Podcasts</h3>
-            <p class="format-desc">Insights de especialistas em áudio. Conteúdo para ouvir enquanto você faz outra coisa.</p>
+            <p class="format-desc">Conversas, análises e bastidores para aprender ouvindo sem perder continuidade na plataforma.</p>
           </div>
         </div>
         <div class="format-card reveal reveal-delay-2">
-          <div class="format-icon">🔴</div>
+          <div class="format-icon">L</div>
           <div>
             <h3 class="format-title">Lives</h3>
-            <p class="format-desc">Transmissões ao vivo com creators. Faça perguntas, interaja e aprenda em tempo real.</p>
+            <p class="format-desc">Sessões ao vivo com interação, perguntas e comunidade para acelerar clareza em tempo real.</p>
           </div>
         </div>
       </div>
@@ -1620,16 +1836,16 @@
       <div id="form-container">
         <div id="form-creator-header" class="creator-content visible">
           <p class="form-tag">Acesso antecipado</p>
-          <h2 class="form-title">Entre na lista de<br/>Embaixadores Fundadores<svg viewBox="0 0 24 24" fill="none" style="width:1em;height:1em;vertical-align:-0.15em;margin-left:0.15em;flex-shrink:0"><circle cx="12" cy="12" r="10" fill="#3b82f6"/><path d="M9 12l2 2 4-4" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></h2>
-          <p class="form-sub">Os Embaixadores Fundadores constroem a plataforma com a gente e garantem condições que não estarão disponíveis depois do lançamento público.</p>
+          <h2 class="form-title">Candidate-se ao grupo<br/>de creators fundadores<svg viewBox="0 0 24 24" fill="none" style="width:1em;height:1em;vertical-align:-0.15em;margin-left:0.15em;flex-shrink:0"><circle cx="12" cy="12" r="10" fill="#3b82f6"/><path d="M9 12l2 2 4-4" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></h2>
+          <p class="form-sub">Estamos selecionando creators para validar conteúdo, produto e distribuição antes da abertura pública. Fundadores entram com prioridade, visibilidade e condições especiais.</p>
         </div>
         <div id="form-consumer-header" class="consumer-content">
           <p class="form-tag">Acesso antecipado</p>
-          <h2 class="form-title">Você está a um passo<br/>de entrar antes de todo mundo.</h2>
-          <p class="form-sub">Alunos fundadores entram com vantagens exclusivas que não voltam depois. Cadastre-se agora para ser avisado no lançamento.</p>
+          <h2 class="form-title">Entre na lista dos<br/>primeiros alunos da Classfy.</h2>
+          <p class="form-sub">Receba o convite de acesso antecipado, acompanhe a abertura das primeiras trilhas e participe da fase fundadora da plataforma.</p>
         </div>
 
-        <p class="form-count"><strong>Seja um dos primeiros</strong> a garantir sua vaga.</p>
+        <p class="form-count"><strong>Vagas iniciais limitadas</strong> para manter curadoria, qualidade e feedback próximo.</p>
 
         <form id="waitlist-form" onsubmit="handleStep1(event)">
           <input type="hidden" id="form-type" value="creator" />
@@ -1684,10 +1900,10 @@
           <div id="consumer-fields"></div>
 
           <button type="submit" class="submit-btn" id="submit-btn">
-            Garantir minha vaga →
+            Solicitar acesso antecipado →
           </button>
 
-          <p class="form-note">Sem spam. Só o aviso quando a plataforma abrir e as condições de fundador.</p>
+          <p class="form-note">Sem spam. Enviaremos apenas atualizações relevantes sobre acesso, seleção e lançamento.</p>
         </form>
       </div>
 
@@ -1715,24 +1931,24 @@
     <!-- LEFT PANEL -->
     <div class="step-left">
       <span class="step-logo-text">Classfy</span>
-      <h2 class="step-big-quote">Saber<br/>muda<br/><span class="accent">tudo.</span></h2>
-      <p class="step-quote-caption">Quem entra agora constrói a plataforma com a gente. Essas condições não voltam depois do lançamento.</p>
+      <h2 class="step-big-quote">Ensinar<br/>também<br/><span class="accent">escala.</span></h2>
+      <p class="step-quote-caption">Quem entra agora ajuda a moldar produto, curadoria e economia antes da abertura pública.</p>
 
       <div class="founder-perks">
         <div class="founder-perk-item">
           <!-- Verified badge -->
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#3b82f6"/><path d="M9 12l2 2 4-4" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          Selo verificado na plataforma
+          Perfil fundador com selo verificado
         </div>
         <div class="founder-perk-item">
           <!-- Yellow crown (Pro) -->
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m2 4 3 12h14l3-12-6 5-4-8-4 8-6-5zm3 16h14"/></svg>
-          Plano Pro incluso durante a fundação
+          Acesso Pro durante a fase fundadora
         </div>
         <div class="founder-perk-item">
           <!-- Red crown (Premium - brand color) -->
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#e01c4b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m2 4 3 12h14l3-12-6 5-4-8-4 8-6-5zm3 16h14"/></svg>
-          Condições de fundador permanentes
+          Condições especiais de fundador
         </div>
       </div>
 
@@ -1753,16 +1969,16 @@
         <div class="founder-banner">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#3b82f6"/><path d="M9 12l2 2 4-4" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m2 4 3 12h14l3-12-6 5-4-8-4 8-6-5zm3 16h14"/></svg>
-          <span>Você está se candidatando a <strong style="color:#fff">Embaixador Fundador</strong> — vagas limitadas.</span>
+          <span>Você está se candidatando ao grupo de <strong style="color:#fff">Creators Fundadores</strong> — vagas limitadas.</span>
         </div>
 
         <p class="step-eyebrow">Etapa 2 de 3</p>
-        <h2 class="step-heading">Conta um pouco mais sobre você.</h2>
-        <p class="step-desc">Queremos entender quem você é e o que quer ensinar antes de confirmar sua vaga.</p>
+        <h2 class="step-heading">Conte um pouco mais sobre seu conteúdo.</h2>
+        <p class="step-desc">Queremos entender sua área, método e consistência para priorizar creators alinhados com a fase inicial.</p>
 
         <div class="form-group">
           <label>O que você ensina? *</label>
-          <textarea id="what_you_teach" placeholder="Descreva seu conteúdo e metodologia..."></textarea>
+          <textarea id="what_you_teach" placeholder="Descreva sua área, público, método e transformação que você entrega..."></textarea>
         </div>
         <div class="form-group">
           <label>Link de um conteúdo seu (opcional)</label>
@@ -1779,7 +1995,7 @@
         </div>
         <div class="form-group">
           <label>Por que quer entrar agora, no início? *</label>
-          <textarea id="why_now" placeholder="Nos conte o que te motivou a querer ser um Embaixador Fundador..."></textarea>
+          <textarea id="why_now" placeholder="Conte por que faz sentido construir essa fase inicial com a Classfy..."></textarea>
         </div>
 
         <button class="submit-btn" style="margin-top:8px" onclick="goToStep3()">Próximo →</button>
@@ -1789,54 +2005,54 @@
       <div id="step3-panel" class="step-panel">
         <button class="step-back" onclick="showStep(2)">← Voltar</button>
         <p class="step-eyebrow">Etapa 3 de 3</p>
-        <h2 class="step-heading">Seu compromisso como<br/>Embaixador Fundador.</h2>
-        <p class="step-desc">Esses são os requisitos mínimos para participar do pool de distribuição desde o primeiro mês.</p>
+        <h2 class="step-heading">Seu compromisso como<br/>creator fundador.</h2>
+        <p class="step-desc">Esses são os requisitos mínimos para validar qualidade, consistência e elegibilidade na fase inicial.</p>
 
         <div class="commitment-list">
           <div class="commitment-item">
             <div class="commitment-check">✓</div>
             <div>
               <strong>4 conteúdos nos primeiros 30 dias</strong>
-              <p>1 por semana — o mínimo para ganhar visibilidade e participar do pool.</p>
+              <p>1 por semana — o mínimo para gerar tração, dados e aprendizado sobre seu público.</p>
             </div>
           </div>
           <div class="commitment-item">
             <div class="commitment-check">✓</div>
             <div>
               <strong>Mínimo de 1 conteúdo por mês pelos primeiros 3 meses</strong>
-              <p>Criadores inativos por 30 dias saem do pool — mas mantêm o conteúdo na plataforma.</p>
+              <p>Criadores inativos podem perder prioridade de distribuição e elegibilidade no período.</p>
             </div>
           </div>
           <div class="commitment-item">
             <div class="commitment-check">✓</div>
             <div>
-              <strong>Participar do grupo de Embaixadores</strong>
-              <p>Feedback ativo e voz nas decisões da plataforma durante os primeiros 6 meses.</p>
+              <strong>Participar do grupo de fundadores</strong>
+              <p>Feedback ativo sobre produto, curadoria, métricas e experiência dos primeiros alunos.</p>
             </div>
           </div>
         </div>
 
         <div class="returns-block">
-          <p class="returns-label">Em troca, a Classfy garante</p>
+          <p class="returns-label">Em troca, a Classfy oferece</p>
           <ul>
-            <li>40% da receita total distribuídos por fórmula pública todo mês</li>
+            <li>Modelo de distribuição mensal com fórmula pública e critérios de elegibilidade</li>
             <li class="icon-li">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" style="flex-shrink:0"><circle cx="12" cy="12" r="10" fill="#3b82f6"/><path d="M9 12l2 2 4-4" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              Selo verificado na plataforma — visível para todos os alunos
+              Selo fundador/verificado na plataforma — visível para os primeiros alunos
             </li>
             <li class="icon-li">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path d="m2 4 3 12h14l3-12-6 5-4-8-4 8-6-5zm3 16h14"/></svg>
-              Plano Pro incluso + condições que não voltam depois do lançamento
+              Acesso Pro na fase fundadora + condições especiais de lançamento
             </li>
           </ul>
         </div>
 
         <div class="commitment-checkbox">
           <input type="checkbox" id="accept-terms" />
-          <label for="accept-terms">Li e aceito os compromissos acima. Entendo que eles são o requisito mínimo para participar do pool de distribuição.</label>
+          <label for="accept-terms">Li e aceito os compromissos acima. Entendo que eles são requisitos mínimos de seleção, visibilidade e elegibilidade na fase fundadora.</label>
         </div>
 
-        <button class="submit-btn" id="final-submit-btn" onclick="submitApplication()">Confirmar candidatura →</button>
+        <button class="submit-btn" id="final-submit-btn" onclick="submitApplication()">Enviar candidatura →</button>
       </div>
 
       <!-- SUCESSO -->
@@ -1844,7 +2060,7 @@
         <div class="step-success-inner">
           <div class="step-success-icon">✓</div>
           <h3 class="step-success-title">Candidatura enviada.</h3>
-          <p class="step-success-sub">Você está na lista de Embaixadores Fundadores. Entraremos em contato com os próximos passos. Fique de olho no e-mail.</p>
+          <p class="step-success-sub">Você está na lista de creators fundadores. Entraremos em contato com os próximos passos. Fique de olho no e-mail.</p>
         </div>
       </div>
 
@@ -1868,6 +2084,15 @@
        TAB SWITCH + THEME
     ======================== */
     let currentTab = 'creator';
+
+    function navigateTab(event, tab, target) {
+      event.preventDefault();
+      const willSwitch = tab !== currentTab;
+      if (willSwitch) switchTab(tab);
+      window.setTimeout(() => {
+        document.querySelector(target)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, willSwitch ? 120 : 0);
+    }
 
     function switchTab(tab) {
       if (tab === currentTab) return;
@@ -1901,8 +2126,8 @@
 
         const cta = document.getElementById('hero-cta');
         cta.textContent = tab === 'creator'
-          ? 'Quero ser Embaixador Fundador'
-          : 'Quero começar a aprender';
+          ? 'Candidatar como creator fundador'
+          : 'Entrar na lista de alunos';
 
         const comoLink = document.getElementById('como-funciona-link');
         if (comoLink) {
@@ -2098,7 +2323,7 @@
 
       } catch (err) {
         btn.disabled = false;
-        btn.textContent = 'Confirmar candidatura →';
+        btn.textContent = 'Enviar candidatura →';
         showAlert('Algo deu errado. Tente novamente em instantes.');
       }
     }
@@ -2135,11 +2360,11 @@
         const successEl = document.getElementById('success-msg');
         successEl.classList.add('visible');
         document.getElementById('success-text').textContent =
-          'Você será notificado quando a plataforma abrir. Alunos fundadores têm vantagens exclusivas — fique de olho no e-mail.';
+          'Você será notificado quando a plataforma abrir para os primeiros alunos. Fique de olho no e-mail.';
 
       } catch (err) {
         btn.disabled = false;
-        btn.textContent = 'Garantir minha vaga →';
+        btn.textContent = 'Solicitar acesso antecipado →';
         showAlert('Algo deu errado. Tente novamente em instantes.');
       }
     }
